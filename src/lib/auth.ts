@@ -12,6 +12,7 @@ const getCurrentEpochTime = () => {
 };
 
 export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
+  secret: process.env.AUTH_SECRET,
   providers: [
     MicrosoftEntraID({
       authorization: {
