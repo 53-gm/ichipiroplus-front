@@ -18,7 +18,7 @@ const StepProfile = ({
   user,
 }: StepProfileProps) => {
   return (
-    <Card variant="outline" bg="white" p="md" maxW="4xl" w="4xl">
+    <Card variant="outline" bg="white" p="md" w={{ base: "4xl", md: "sm" }}>
       <CardHeader>
         <Heading size="xl">プロフィール設定</Heading>
       </CardHeader>

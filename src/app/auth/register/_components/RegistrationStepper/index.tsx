@@ -27,7 +27,13 @@ const RegistrationStepper = ({ renderItem }: RegistrationStepperProps) => {
   return (
     <>
       {/* ステッパーUI部分 */}
-      <Stepper colorScheme="green" index={activeStep} steps={steps} size="lg" />
+      <Stepper
+        colorScheme="green"
+        index={activeStep}
+        steps={steps}
+        size={{ base: "lg", md: "sm" }}
+        orientation="horizontal"
+      />
       {renderItem({ onStepNext, onStepPrev })[activeStep]}
     </>
   );

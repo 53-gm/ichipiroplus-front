@@ -14,7 +14,7 @@ interface StepIntroProps {
 
 const StepIntro = ({ onStepNext }: StepIntroProps) => {
   return (
-    <Card variant="outline" bg="white" p="md" maxW="4xl" w="4xl">
+    <Card variant="outline" bg="white" p="md" w={{ base: "4xl", md: "sm" }}>
       <CardHeader>
         <Heading size="xl">はじめに</Heading>
       </CardHeader>
