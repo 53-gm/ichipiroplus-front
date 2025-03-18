@@ -17,7 +17,7 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
     MicrosoftEntraID({
       authorization: {
         params: {
-          scope: "openid profile email offline_access User.Read",
+          scope: "openid profile email User.Read",
         },
       },
     }),
