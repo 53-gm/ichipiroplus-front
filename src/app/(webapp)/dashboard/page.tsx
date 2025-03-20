@@ -1,5 +1,4 @@
-
-const Home = async () => {
+const DashBoardPage = async () => {
   return (
     <>
       ここに各機能の一部をぽんぽんと貼る予定 <br />
@@ -8,4 +7,4 @@ const Home = async () => {
   );
 };
 
-export default Home;
+export default DashBoardPage;
