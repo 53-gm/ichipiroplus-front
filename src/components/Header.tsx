@@ -1,12 +1,17 @@
-import { auth } from "@/lib/auth";
-import { Box, Center, Heading, HStack, Spacer, Text } from "@yamada-ui/react";
+import {
+  Box,
+  Center,
+  Heading,
+  HStack,
+  Skeleton,
+  Spacer,
+  Text,
+} from "@yamada-ui/react";
+import { Suspense } from "react";
 import UserMenu from "../features/user/components/UserMenu";
 import { ThemeToggleButton } from "./ThemeToggleButton";
 
 const Header = async () => {
-  const session = await auth();
-  const user = session?.user;
-
   return (
     <>
       <Center as="header" w="full" position="sticky" py="md" zIndex={10}>
@@ -23,7 +28,13 @@ const Header = async () => {
           <Box display={{ base: "block", md: "none" }}>
             <ThemeToggleButton />
           </Box>
-          <UserMenu userProfile={user?.profile} />
+          <Suspense
+            fallback={
+              <Skeleton borderRadius="full" width="48px" height="48px" />
+            }
+          >
+            <UserMenu />
+          </Suspense>
         </HStack>
       </Center>
     </>

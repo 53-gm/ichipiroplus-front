@@ -1,4 +1,4 @@
-import { signOut } from "@/lib/auth";
+import { auth, signOut } from "@/lib/auth";
 import { UserIcon } from "@yamada-ui/lucide";
 import {
   Avatar,
@@ -12,13 +12,10 @@ import {
   MenuList,
 } from "@yamada-ui/react";
 import Link from "next/link";
-import { UserProfile } from "../types";
 
-interface UserMenuProps {
-  userProfile?: UserProfile;
-}
-
-const UserMenu = ({ userProfile }: UserMenuProps) => {
+const UserMenu = async () => {
+  const session = await auth();
+  const userProfile = session?.user?.profile;
   return (
     <>
       <Menu animation="top">
