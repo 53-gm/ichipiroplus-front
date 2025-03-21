@@ -1,4 +1,4 @@
-import { signIn, signOut } from "@/lib/auth";
+import { signOut } from "@/lib/auth";
 import { UserIcon } from "@yamada-ui/lucide";
 import {
   Avatar,
@@ -72,16 +72,11 @@ const UserMenu = ({ userProfile }: UserMenuProps) => {
               </Box>
             </form>
           ) : (
-            <form
-              action={async () => {
-                "use server";
-                await signIn("google");
-              }}
-            >
+            <Link href="/auth/login">
               <Box as="button" type="submit" w="full">
                 <MenuItem>サインイン</MenuItem>
               </Box>
-            </form>
+            </Link>
           )}
         </MenuList>
       </Menu>
