@@ -39,7 +39,6 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
               headers: {
                 "Content-Type": "application/json",
               },
-              cache: "no-store",
             }
           );
 
@@ -83,13 +82,10 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
             headers: {
               "Content-Type": "application/json",
             },
-            cache: "no-store",
           }
         );
 
         const data = await response.json();
-
-        console.log("token refresh");
 
         return {
           ...token,
