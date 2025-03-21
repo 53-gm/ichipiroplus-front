@@ -22,12 +22,6 @@ export default auth(async (req) => {
     return NextResponse.next();
   }
 
-  if (!isAuthenticated && !isAuthRoute) {
-    const loginUrl = new URL("/auth/login", req.url);
-    loginUrl.searchParams.set("callbackUrl", callbackUrl);
-    return NextResponse.redirect(loginUrl);
-  }
-
   if (isAuthenticated && !isProfileComplete && !isRegisterPage) {
     const registerUrl = new URL("/auth/register", req.url);
     registerUrl.searchParams.set("callbackUrl", callbackUrl);
@@ -36,11 +30,12 @@ export default auth(async (req) => {
 
   if (isAuthenticated && isProfileComplete && isAuthRoute) {
     if (isLoginPage && req.nextUrl.searchParams.get("callbackUrl")) {
-      const redirectUrl = req.nextUrl.searchParams.get("callbackUrl") || "/";
+      const redirectUrl =
+        req.nextUrl.searchParams.get("callbackUrl") || "/dashboard";
       return NextResponse.redirect(new URL(redirectUrl, req.url));
     }
 
-    return NextResponse.redirect(new URL("/", req.url));
+    return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
   return NextResponse.next();

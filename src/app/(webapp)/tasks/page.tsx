@@ -1,9 +1,9 @@
 import { getAllTasks } from "@/features/task/api";
+import TasksDashboard from "@/features/task/components/TaskDashboard";
 import { getNowTermAndYear, getRegistrations } from "@/features/timetable/api";
 import { auth } from "@/lib/auth";
 import { Box, Heading, VStack } from "@yamada-ui/react";
 import { notFound } from "next/navigation";
-import TasksDashboard from "../../features/task/components/TaskDashboard";
 
 const TasksPage = async () => {
   // 現在のユーザー情報を取得
