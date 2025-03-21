@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/*
+Disallow: /auth/*
+
+Disallow: /*?*
+
+Allow: /static/*
+Allow: /_next/static/*
+
+# Set crawl delay for all bots
+Crawl-delay: 3
