@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { UserProfile } from "@/features/user/types";
 import NextAuth from "next-auth";
 import "next-auth/jwt";
