@@ -11,7 +11,7 @@ import { Suspense } from "react";
 import UserMenu from "../features/user/components/UserMenu";
 import { ThemeToggleButton } from "./ThemeToggleButton";
 
-const Header = async () => {
+const Header = () => {
   return (
     <>
       <Center as="header" w="full" position="sticky" py="md" zIndex={10}>
