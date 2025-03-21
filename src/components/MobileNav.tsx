@@ -24,7 +24,7 @@ const MobileNav = () => {
     {
       label: "ホーム",
       icon: <HouseIcon />,
-      href: "/",
+      href: "/dashboard",
     },
     {
       label: "時間割",

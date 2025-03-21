@@ -20,7 +20,7 @@ export const getNavigationItems = (): NavMenuItem[] => {
     {
       label: "ホーム",
       icon: <HouseIcon />,
-      href: "/",
+      href: "/dashboard",
     },
     {
       label: "時間割",
