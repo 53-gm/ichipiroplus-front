@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import "@/lib/tiptap/styles/tiptap.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Center, VStack } from "@yamada-ui/react";
 import type { Metadata } from "next";
 import { Zen_Kaku_Gothic_New } from "next/font/google";
@@ -11,12 +12,11 @@ import "./globals.css";
 const ZenKakuGothicNewFont = Zen_Kaku_Gothic_New({
   subsets: ["latin"],
   weight: "500",
-  preload: true,
 });
 
 export const metadata: Metadata = {
   title: "Ichipiro+",
-  description: "",
+  description: "大学生活をスマートに管理",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -37,6 +37,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
             <VStack maxW="9xl" fontSize={{ base: "md", md: "xs" }}>
               <Header />
               {children}
+              <SpeedInsights />
               <Footer />
             </VStack>
           </Center>

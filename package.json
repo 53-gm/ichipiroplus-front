@@ -28,6 +28,7 @@
     "@tiptap/react": "^2.11.5",
     "@tiptap/starter-kit": "^2.11.5",
     "@tiptap/suggestion": "^2.11.5",
+    "@vercel/speed-insights": "^1.2.0",
     "@yamada-ui/calendar": "^1.8.14",
     "@yamada-ui/lucide": "^1.10.3",
     "@yamada-ui/react": "^1.7.4",
