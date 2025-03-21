@@ -12,6 +12,8 @@ import "./globals.css";
 const ZenKakuGothicNewFont = Zen_Kaku_Gothic_New({
   subsets: ["latin"],
   weight: "500",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
