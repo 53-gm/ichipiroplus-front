@@ -7,7 +7,6 @@ export default auth(async (req) => {
   const isAuthRoute = nextUrl.pathname.startsWith("/auth");
   const isLoginPage = nextUrl.pathname === "/auth/login";
   const isRegisterPage = nextUrl.pathname === "/auth/register";
-  const isHomePage = nextUrl.pathname === "/";
 
   const isAuthenticated = !!session?.user;
   const isProfileComplete = isAuthenticated
@@ -21,12 +20,6 @@ export default auth(async (req) => {
     nextUrl.pathname.match(/\.(jpg|jpeg|png|gif|svg|css|js|ico)$/)
   ) {
     return NextResponse.next();
-  }
-
-  if (!isAuthenticated && !isHomePage && !isAuthRoute) {
-    const loginUrl = new URL("/auth/login", req.url);
-    loginUrl.searchParams.set("callbackUrl", callbackUrl);
-    return NextResponse.redirect(loginUrl);
   }
 
   if (isAuthenticated && !isProfileComplete && !isRegisterPage) {

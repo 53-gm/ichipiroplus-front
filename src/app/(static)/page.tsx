@@ -27,7 +27,7 @@ const Home = async () => {
         <Text fontSize="xl" color="gray.600" _dark={{ color: "gray.300" }}>
           時間割管理、タスク管理、記事作成・共有が一つにまとまった
           <br />
-          広島市立大学生活をサポートするプラットフォーム
+          広島市立大学生活をサポートする非公式プラットフォーム
         </Text>
 
         {session?.user ? (
