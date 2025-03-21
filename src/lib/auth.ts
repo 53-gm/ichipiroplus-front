@@ -11,6 +11,8 @@ const getCurrentEpochTime = () => {
   return Math.floor(new Date().getTime() / 1000);
 };
 
+let refreshPromise: Promise<any> | null = null;
+
 export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
   secret: process.env.AUTH_SECRET,
   providers: [
@@ -74,24 +76,42 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
       }
 
       if (getCurrentEpochTime() >= token.expire!) {
-        const response = await fetch(
-          `${process.env.BACKEND_URL}/api/v1/auth/dj-rest-auth/token/refresh/`,
-          {
-            method: "POST",
-            body: JSON.stringify({ refresh: token.refreshToken }),
-            headers: {
-              "Content-Type": "application/json",
-            },
+        try {
+          if (refreshPromise === null) {
+            refreshPromise = fetch(
+              `${process.env.BACKEND_URL}/api/v1/auth/dj-rest-auth/token/refresh/`,
+              {
+                method: "POST",
+                body: JSON.stringify({ refresh: token.refreshToken }),
+                headers: { "Content-Type": "application/json" },
+                cache: "no-store",
+              }
+            ).then((response) => {
+              if (!response.ok) {
+                throw new Error(`Token refresh failed: ${response.status}`);
+              }
+              return response.json();
+            });
           }
-        );
 
-        const data = await response.json();
+          const data = await refreshPromise;
 
-        return {
-          ...token,
-          accessToken: data.access,
-          expire: getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME,
-        };
+          refreshPromise = null;
+
+          return {
+            ...token,
+            accessToken: data.access,
+            expire: getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME,
+          };
+        } catch (error) {
+          refreshPromise = null;
+          console.error("Token refresh failed:", error);
+
+          return {
+            ...token,
+            error: "RefreshAccessTokenError",
+          };
+        }
       }
 
       return token;
