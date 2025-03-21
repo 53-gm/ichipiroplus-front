@@ -37,7 +37,7 @@
   "lang": "ja-JP",
   "name": "Ichipiro+",
   "short_name": "Ichipiro+",
-  "start_url": "/",
+  "start_url": "/dashboard",
   "scope": "/",
   "description": "広島市立大学生用アプリ"
 }
