@@ -52,4 +52,4 @@ export const config = {
   ],
 };
 
-export const runtime = "experimental-edge";
+export const runtime = "nodejs";
