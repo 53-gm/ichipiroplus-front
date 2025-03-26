@@ -4,8 +4,11 @@
 import { ApiError } from "@/lib/api/client";
 import { format } from "@formkit/tempo";
 import { useEditor } from "@tiptap/react";
-import { ArrowLeftIcon, SaveIcon } from "@yamada-ui/lucide";
+import { SaveIcon } from "@yamada-ui/lucide";
 import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
   Button,
   FormControl,
   Heading,
@@ -105,17 +108,16 @@ const ArticleEditor = ({ article }: ArticleEditorProps) => {
     }
   };
 
-  const handleCancel = () => {
-    // 変更を破棄して記事表示ページに戻る
-    router.push(viewPath);
-  };
-
   if (!editor) {
     return null; // ローディング中は何も表示しない
   }
 
   return (
     <VStack w="full" align="start">
+      <Alert status="warning">
+        <AlertIcon />
+        <AlertTitle>このページではPCでの操作が想定されています</AlertTitle>
+      </Alert>
       {/* 編集ヘッダー部分 */}
       <VStack
         as="header"
@@ -129,7 +131,7 @@ const ArticleEditor = ({ article }: ArticleEditorProps) => {
         <Heading size="md">記事の編集</Heading>
 
         {/* タイトル入力 */}
-        <FormControl>
+        <FormControl required label="タイトル">
           <Input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -155,24 +157,15 @@ const ArticleEditor = ({ article }: ArticleEditorProps) => {
             </Text>
           </HStack>
 
-          <HStack>
-            <Button
-              leftIcon={<ArrowLeftIcon />}
-              variant="outline"
-              onClick={handleCancel}
-            >
-              キャンセル
-            </Button>
-            <Button
-              leftIcon={<SaveIcon />}
-              colorScheme="blue"
-              isLoading={isSaving}
-              loadingText="保存中"
-              onClick={saveArticle}
-            >
-              保存
-            </Button>
-          </HStack>
+          <Button
+            leftIcon={<SaveIcon />}
+            colorScheme="blue"
+            isLoading={isSaving}
+            loadingText="保存中"
+            onClick={saveArticle}
+          >
+            保存
+          </Button>
         </HStack>
       </VStack>
 

@@ -13,9 +13,11 @@ import {
   RadioGroup,
   Select,
   SelectItem,
+  Tag,
   Textarea,
   VStack,
 } from "@yamada-ui/react";
+import "dayjs/locale/ja";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTaskContext } from "../context/TaskContext";
@@ -79,7 +81,7 @@ const CreateTaskForm = ({
     <Box
       as="form"
       onSubmit={handleSubmit(handleFormSubmit)}
-      bg="white"
+      bg={["white", "black"]}
       p={4}
       borderWidth="1px"
       borderRadius="md"
@@ -87,19 +89,28 @@ const CreateTaskForm = ({
     >
       <VStack>
         {/* タイトル */}
-        <FormControl label="タイトル" isInvalid={!!errors.title} isRequired>
+        <FormControl
+          label="タイトル"
+          invalid={!!errors.title}
+          required
+          requiredIndicator={
+            <Tag size="sm" colorScheme="danger" ms={2}>
+              必須
+            </Tag>
+          }
+        >
           <Input placeholder="タスクのタイトル" {...register("title")} />
         </FormControl>
 
         {/* 講義（オプション） */}
         {lectureItems && (
-          <FormControl>
+          <FormControl label="講義" invalid={!!errors.title}>
             <Controller
               name="registration_id"
               control={control}
               render={({ field }) => (
                 <Select
-                  placeholder="講義を選択(任意)"
+                  placeholder="講義を選択"
                   {...field}
                   items={lectureItems}
                   value={field.value || undefined}
@@ -145,6 +156,7 @@ const CreateTaskForm = ({
             control={control}
             render={({ field }) => (
               <RadioGroup
+                direction="row"
                 {...field}
                 value={String(field.value)}
                 onChange={(value) => field.onChange(Number(value))}
@@ -152,26 +164,6 @@ const CreateTaskForm = ({
                 <Radio value="0">低</Radio>
                 <Radio value="1">中</Radio>
                 <Radio value="2">高</Radio>
-              </RadioGroup>
-            )}
-          />
-        </FormControl>
-
-        {/* 状態 */}
-
-        <FormControl label="進行状態" isInvalid={!!errors.status}>
-          <Controller
-            name="status"
-            control={control}
-            render={({ field }) => (
-              <RadioGroup
-                {...field}
-                value={String(field.value)}
-                onChange={(value) => field.onChange(Number(value))}
-              >
-                <Radio value="0">未着手</Radio>
-                <Radio value="1">進行中</Radio>
-                <Radio value="2">完了</Radio>
               </RadioGroup>
             )}
           />

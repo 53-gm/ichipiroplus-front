@@ -1,8 +1,11 @@
 "use client";
 import { ApiError } from "@/lib/api/client";
 import { useEditor } from "@tiptap/react";
-import { ArrowLeftIcon, SaveIcon } from "@yamada-ui/lucide";
+import { SaveIcon } from "@yamada-ui/lucide";
 import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
   Button,
   FormControl,
   Heading,
@@ -87,17 +90,16 @@ const ArticleCreator = ({ profileId }: ArticleCreatorProps) => {
     }
   };
 
-  const handleCancel = () => {
-    // キャンセルして記事一覧ページに戻る
-    router.push("/articles");
-  };
-
   if (!editor) {
     return null; // ローディング中は何も表示しない
   }
 
   return (
     <VStack w="full" align="start">
+      <Alert status="warning">
+        <AlertIcon />
+        <AlertTitle>このページではPCでの操作が想定されています</AlertTitle>
+      </Alert>
       {/* ヘッダー部分 */}
       <VStack
         as="header"
@@ -108,10 +110,10 @@ const ArticleCreator = ({ profileId }: ArticleCreatorProps) => {
         w="full"
         align="start"
       >
-        <Heading size="md">新しい記事を作成</Heading>
+        <Heading size="lg">新しい記事を作成</Heading>
 
         {/* タイトル入力 */}
-        <FormControl isRequired>
+        <FormControl label="タイトル" required>
           <Input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -128,24 +130,15 @@ const ArticleCreator = ({ profileId }: ArticleCreatorProps) => {
             公開する
           </Switch>
 
-          <HStack>
-            <Button
-              leftIcon={<ArrowLeftIcon />}
-              variant="outline"
-              onClick={handleCancel}
-            >
-              キャンセル
-            </Button>
-            <Button
-              leftIcon={<SaveIcon />}
-              colorScheme="blue"
-              isLoading={isSaving}
-              loadingText="作成中"
-              onClick={saveArticle}
-            >
-              作成
-            </Button>
-          </HStack>
+          <Button
+            leftIcon={<SaveIcon />}
+            colorScheme="blue"
+            isLoading={isSaving}
+            loadingText="作成中"
+            onClick={saveArticle}
+          >
+            作成
+          </Button>
         </HStack>
       </VStack>
 
