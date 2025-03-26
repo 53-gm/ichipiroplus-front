@@ -61,7 +61,7 @@ const UserMenu = async () => {
             <form
               action={async () => {
                 "use server";
-                await signOut();
+                await signOut({ redirectTo: "/" });
               }}
             >
               <Box as="button" type="submit" w="full">

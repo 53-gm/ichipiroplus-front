@@ -27,10 +27,16 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
   ],
   pages: {
     signIn: "/auth/login",
+    error: "/auth/error",
   },
   callbacks: {
     async signIn({ user, account }) {
       if (account?.provider === "microsoft-entra-id") {
+        const email = user.email || "";
+
+        if (!email.endsWith("hiroshima-cu.ac.jp")) {
+          return false; // サインインを拒否
+        }
         const { access_token, id_token } = account;
 
         try {
