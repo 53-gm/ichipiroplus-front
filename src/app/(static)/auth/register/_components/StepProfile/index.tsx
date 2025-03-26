@@ -29,6 +29,7 @@ const StepProfile = ({
           faculties={faculties}
           userProfile={user.profile}
           onSuccess={onStepNext}
+          isFirst
         />
       </CardBody>
     </Card>

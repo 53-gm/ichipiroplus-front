@@ -1,5 +1,6 @@
 import { getAllDepartments, getAllFaculties } from "@/features/user/api";
 import { auth } from "@/lib/auth";
+import { VStack } from "@yamada-ui/react";
 import { notFound } from "next/navigation";
 import RegistrationSteps from "./_components/RegistrationsSteps";
 
@@ -15,11 +16,13 @@ const RegisterPage = async () => {
   const faculties = await getAllFaculties();
 
   return (
-    <RegistrationSteps
-      departments={departments}
-      faculties={faculties}
-      user={user}
-    />
+    <VStack alignItems="center">
+      <RegistrationSteps
+        departments={departments}
+        faculties={faculties}
+        user={user}
+      />
+    </VStack>
   );
 };
 

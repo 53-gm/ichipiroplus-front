@@ -7,13 +7,21 @@ import {
   LibraryIcon,
   SettingsIcon,
 } from "@yamada-ui/lucide";
-import { Box, HStack, Icon, Text, VStack } from "@yamada-ui/react";
+import {
+  Box,
+  Component,
+  HStack,
+  Icon,
+  IconProps,
+  Text,
+  VStack,
+} from "@yamada-ui/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface NavItem {
   label: string;
-  icon: React.ReactNode;
+  icon: Component<"svg", IconProps>;
   href: string;
 }
 
@@ -23,27 +31,27 @@ const MobileNav = () => {
   const navItems: NavItem[] = [
     {
       label: "ホーム",
-      icon: <HouseIcon />,
+      icon: HouseIcon,
       href: "/dashboard",
     },
     {
       label: "時間割",
-      icon: <CalendarIcon />,
+      icon: CalendarIcon,
       href: "/timetable",
     },
     {
       label: "タスク",
-      icon: <CircleCheckIcon />,
+      icon: CircleCheckIcon,
       href: "/tasks",
     },
     {
       label: "記事",
-      icon: <LibraryIcon />,
+      icon: LibraryIcon,
       href: "/articles",
     },
     {
       label: "設定",
-      icon: <SettingsIcon />,
+      icon: SettingsIcon,
       href: "/settings",
     },
   ];
@@ -55,18 +63,14 @@ const MobileNav = () => {
       bottom="0"
       left="0"
       right="0"
-      bg="white"
+      bg={["white", "gray.800"]}
       borderTop="1px solid"
-      borderColor="gray.200"
-      py={2}
+      borderColor={["gray.200", "gray.700"]}
+      py="sm"
       zIndex={100}
       display={{ base: "none", md: "block" }}
-      _dark={{
-        bg: "gray.800",
-        borderColor: "gray.700",
-      }}
     >
-      <HStack justify="space-around" px={4}>
+      <HStack justify="space-around" px="sm">
         {navItems.map((item) => {
           const isActive =
             pathname === item.href || pathname.startsWith(`${item.href}/`);
@@ -80,12 +84,13 @@ const MobileNav = () => {
               <VStack
                 gap={1}
                 align="center"
-                color={isActive ? "primary.500" : "gray.500"}
-                _dark={{
-                  color: isActive ? "primary.300" : "gray.400",
-                }}
+                color={
+                  isActive
+                    ? ["primary.500", "primary.300"]
+                    : ["gray.500", "gray.400"]
+                }
               >
-                <Icon as={() => item.icon} boxSize="24px" />
+                <Icon as={item.icon} fontSize="24px" />
                 <Text fontSize="xs" fontWeight={isActive ? "bold" : "normal"}>
                   {item.label}
                 </Text>

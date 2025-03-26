@@ -36,7 +36,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
       <body className={ZenKakuGothicNewFont.className}>
         <YamadaUIProvider>
           <Center>
-            <VStack maxW="9xl" fontSize={{ base: "md", md: "xs" }}>
+            <VStack maxW="9xl" fontSize={{ base: "md", md: "sm" }}>
               <Header />
               {children}
               <SpeedInsights />

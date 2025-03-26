@@ -29,6 +29,14 @@ export const deleteAccount = async () => {
  * プロフィールを更新
  */
 export const updateUserProfile = async (data: ProfileFormData) => {
+  if (data.faculty_id == "undefined") {
+    data.faculty_id = undefined;
+  }
+
+  if (data.department_id == "undefined") {
+    data.department_id = undefined;
+  }
+
   const updatedProfile = await fetchApi<UserProfile>(
     "/api/v1/users/me/profile/",
     {

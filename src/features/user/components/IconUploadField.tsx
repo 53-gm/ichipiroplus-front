@@ -15,6 +15,7 @@ import { ProfileFormData } from "../types";
 
 interface IconUploadFieldProps {
   control: Control<ProfileFormData>;
+  errorMessage?: string;
   label?: string;
   username: string;
   defaultValue?: string;
@@ -24,6 +25,7 @@ const IconUploadField = ({
   control,
   username,
   defaultValue,
+  errorMessage,
 }: IconUploadFieldProps) => {
   const [isUploading, setIsUploading] = useState(false);
 
@@ -65,7 +67,7 @@ const IconUploadField = ({
   };
 
   return (
-    <FormControl isInvalid={!!error} label="アイコン">
+    <FormControl label="アイコン" invalid={!!error} errorMessage={errorMessage}>
       <Box position="relative" w="full">
         <Center>
           <Avatar

@@ -1,6 +1,6 @@
 import { Lecture } from "@/features/timetable/types";
 import { auth } from "@/lib/auth";
-import { Grid, GridItem } from "@yamada-ui/react";
+import { Grid, GridItem, Text } from "@yamada-ui/react";
 import { notFound } from "next/navigation";
 import LectureCard from "./LectureCard";
 
@@ -18,6 +18,9 @@ const LectureList = async ({ lectures, year }: LectureListProps) => {
 
   return (
     <>
+      <Text>
+        ※編集は各講義の右上のボタンから出来ますが、この編集した内容は全てのユーザーに対して反映されます。データに間違いがある場合のみに使用してください
+      </Text>
       {lectures.length > 0 ? (
         <Grid
           templateColumns={{

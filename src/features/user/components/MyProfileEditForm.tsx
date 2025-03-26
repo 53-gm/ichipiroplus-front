@@ -17,6 +17,8 @@ import {
   NumberInput,
   Select,
   SelectItem,
+  Tag,
+  Text,
   Textarea,
   useNotice,
   VStack,
@@ -29,6 +31,7 @@ interface MyProfileEditFormProps {
   faculties: Faculty[];
   userProfile: UserProfile;
   onSuccess?: (data: ProfileFormData) => void;
+  isFirst?: boolean;
 }
 
 const MyProfileEditForm = ({
@@ -36,6 +39,7 @@ const MyProfileEditForm = ({
   faculties,
   userProfile,
   onSuccess,
+  isFirst = false,
 }: MyProfileEditFormProps) => {
   const {
     control,
@@ -118,20 +122,35 @@ const MyProfileEditForm = ({
         control={control}
         username={watch("display_name")}
         defaultValue={userProfile.picture || ""}
+        errorMessage={errors.picture?.message}
       />
 
       <FormControl
-        isInvalid={!!errors.display_name}
+        invalid={!!errors.display_name}
         label="名前(表示名)"
         errorMessage={errors.display_name?.message}
+        required
+        requiredIndicator={
+          <Tag size="sm" colorScheme="danger" ms={2}>
+            必須
+          </Tag>
+        }
       >
         <Input placeholder="Ichipiro" {...register("display_name")} />
       </FormControl>
 
       <FormControl
-        isInvalid={!!errors.profile_id}
+        invalid={!!errors.profile_id}
         label="ユーザーID"
         errorMessage={errors.profile_id?.message}
+        required
+        requiredIndicator={
+          <Tag size="sm" colorScheme="danger" ms={2}>
+            必須
+          </Tag>
+        }
+        disabled={!isFirst}
+        helperMessage={<Text>基本的に初回以降変更することが出来ません</Text>}
       >
         <Input placeholder="Ichipiro0003" {...register("profile_id")} />
       </FormControl>
@@ -147,9 +166,10 @@ const MyProfileEditForm = ({
       </FormControl>
 
       <FormControl
-        isInvalid={!!errors.faculty_id}
+        invalid={!!errors.faculty_id}
         label="学部"
         errorMessage={errors.faculty_id?.message}
+        helperMessage={"時間割機能を使用するために必要です"}
       >
         <Controller
           name="faculty_id"
@@ -161,9 +181,15 @@ const MyProfileEditForm = ({
       </FormControl>
 
       <FormControl
-        isInvalid={!!errors.department_id}
+        invalid={!!errors.department_id}
         label="学科"
         errorMessage={errors.department_id?.message}
+        helperMessage={
+          <>
+            <Text>時間割機能を使用するために必要です</Text>
+            <Text>※大学院の場合は○○研究科を選択してください</Text>
+          </>
+        }
       >
         <Controller
           name="department_id"
@@ -179,9 +205,14 @@ const MyProfileEditForm = ({
       </FormControl>
 
       <FormControl
-        isInvalid={!!errors.grade}
+        invalid={!!errors.grade}
         label="学年"
         errorMessage={errors.grade?.message}
+        helperMessage={
+          <>
+            <Text>時間割機能を使用するために必要です</Text>
+          </>
+        }
       >
         <Controller
           name="grade"

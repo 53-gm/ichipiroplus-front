@@ -34,7 +34,6 @@ export const getLectures = (params?: Record<string, string | number>) => {
 
   return fetchApi<Lecture[]>(endpoint, {
     method: "GET",
-    next: { tags: ["lectures"], revalidate: 24 * 60 * 60 },
   });
 };
 
@@ -58,7 +57,7 @@ export const getLecturesByTimeAndTerm = (
 ) => {
   return fetchApi<Lecture[]>(
     `/api/v1/academics/lectures/?day=${day}&time=${time}&terms=${term}`,
-    { method: "GET", next: { tags: ["lectures"], revalidate: 24 * 60 * 60 } }
+    { method: "GET" }
   );
 };
 
