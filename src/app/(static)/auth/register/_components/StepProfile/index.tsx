@@ -12,12 +12,7 @@ interface StepProfileProps {
   user: User;
 }
 
-const StepProfile = ({
-  onStepNext,
-  departments,
-  faculties,
-  user,
-}: StepProfileProps) => {
+const StepProfile = ({ departments, faculties, user }: StepProfileProps) => {
   const router = useRouter();
   return (
     <Card
