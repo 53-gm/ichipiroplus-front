@@ -18,7 +18,10 @@ const ZenKakuGothicNewFont = Zen_Kaku_Gothic_New({
 
 export const metadata: Metadata = {
   title: "Ichipiro+",
-  description: "大学生活をスマートに管理",
+  description:
+    "広島市立大学生向けの時間割管理、タスク管理、記事共有ができる学習支援アプリ。いちぴろプラスで大学生活をもっと便利に。",
+  keywords:
+    "いちぴろ, Ichipiro, 広島市立大学, 時間割管理, 学習支援, 大学生アプリ",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
