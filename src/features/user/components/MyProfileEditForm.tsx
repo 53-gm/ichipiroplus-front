@@ -98,6 +98,7 @@ const MyProfileEditForm = ({
         duration: 2000,
         variant: "left-accent",
       });
+
       onSuccess?.(data);
     } catch (error) {
       if (error instanceof ApiError) {

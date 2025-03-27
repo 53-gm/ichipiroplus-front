@@ -4,7 +4,6 @@
 import { Department, Faculty } from "@/features/user/types";
 import { User } from "next-auth";
 import RegistrationStepper from "../RegistrationStepper";
-import StepComplete from "../StepComplete";
 import StepIntro from "../StepIntro";
 import StepProfile from "../StepProfile";
 
@@ -28,11 +27,6 @@ const RegistrationSteps = ({
           departments={departments}
           faculties={faculties}
           user={user}
-          onStepNext={onStepNext}
-          onStepPrev={onStepPrev}
-        />,
-        <StepComplete
-          key={3}
           onStepNext={onStepNext}
           onStepPrev={onStepPrev}
         />,

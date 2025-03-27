@@ -46,11 +46,11 @@ export const updateUserProfile = async (data: ProfileFormData) => {
     }
   );
 
-  await unstable_update({ user: { profile: updatedProfile } });
-
   revalidateTag(`profile-${updatedProfile.profile_id}`);
   revalidateTag(`articles-by-user-${updatedProfile.profile_id}`);
   revalidateTag("articles");
+
+  await unstable_update({ user: { profile: updatedProfile } });
 
   return updatedProfile;
 };
