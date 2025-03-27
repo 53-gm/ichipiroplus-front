@@ -22,7 +22,12 @@ interface StepIntroProps {
 
 const StepIntro = ({ onStepNext }: StepIntroProps) => {
   return (
-    <Card variant="outline" bg="white" p="md" w={{ base: "4xl", md: "sm" }}>
+    <Card
+      variant="outline"
+      bg={["white", "black"]}
+      p="md"
+      w={{ base: "4xl", md: "sm" }}
+    >
       <CardHeader>
         <Heading size="xl">Ichipiro+へようこそ</Heading>
       </CardHeader>

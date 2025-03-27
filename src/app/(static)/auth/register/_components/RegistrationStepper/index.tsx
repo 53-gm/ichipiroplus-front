@@ -11,27 +11,21 @@ interface RegistrationStepperProps {
 }
 
 const RegistrationStepper = ({ renderItem }: RegistrationStepperProps) => {
-  // 今回の3ステップ
-  const steps: Steps = [
-    { title: "はじめに" },
-    { title: "プロフィール設定" },
-    { title: "登録完了" },
-  ];
+  const steps: Steps = [{ title: "はじめに" }, { title: "プロフィール設定" }];
 
-  // ステップ管理用フック
   const { activeStep, onStepNext, onStepPrev } = useSteps({
-    index: 0, // 初期ステップのインデックス
+    index: 0,
     count: steps.length,
   });
 
   return (
     <>
-      {/* ステッパーUI部分 */}
       <Stepper
         colorScheme="green"
         index={activeStep}
         steps={steps}
         size={{ base: "lg", md: "sm" }}
+        maxW={"md"}
         orientation="horizontal"
       />
       {renderItem({ onStepNext, onStepPrev })[activeStep]}
