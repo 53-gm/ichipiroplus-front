@@ -61,7 +61,7 @@ const LectureCard = ({ lecture, userProfileId, year }: LectureCardProps) => {
         border="1px solid"
         borderColor="gray.300"
         borderRadius="md"
-        bg="white"
+        bg={["white", "black"]}
         w="full"
       >
         <CardHeader>
