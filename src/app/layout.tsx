@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import "@/lib/tiptap/styles/tiptap.css";
+import "@/features/editor/styles/tiptap.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Center, VStack } from "@yamada-ui/react";
 import type { Metadata } from "next";
