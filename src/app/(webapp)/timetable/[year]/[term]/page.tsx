@@ -1,4 +1,4 @@
-import { getRegistrations } from "@/features/timetable/api";
+import { getRegistrations } from "@/features/timetable/api/registration";
 import TimetableGrid from "@/features/timetable/components/TimetableGrid";
 import TimetablePicker from "@/features/timetable/components/TimetablePicker";
 import { Registration } from "@/features/timetable/types";

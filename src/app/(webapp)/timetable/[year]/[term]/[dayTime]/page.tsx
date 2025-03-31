@@ -1,7 +1,5 @@
-import {
-  getLectures,
-  getRegistrationBySchedule,
-} from "@/features/timetable/api";
+import { getLectures } from "@/features/timetable/api/lecture";
+import { getRegistrationBySchedule } from "@/features/timetable/api/registration";
 import LectureList from "@/features/timetable/components/LectureList";
 import LectureDetail from "./_components/LectureDetail/LectureDetail/indext";
 

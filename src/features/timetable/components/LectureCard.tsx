@@ -15,7 +15,7 @@ import {
   VStack,
 } from "@yamada-ui/react";
 import { useRouter } from "next/navigation";
-import { registerLecture } from "../api";
+import { registerLecture } from "../api/registration";
 import { Lecture } from "../types";
 import UpdateLectureButton from "./UpdateLectureButton";
 

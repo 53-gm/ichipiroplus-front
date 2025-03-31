@@ -1,6 +1,7 @@
 import { getAllTasks } from "@/features/task/api";
 import TasksDashboard from "@/features/task/components/TaskDashboard";
-import { getNowTermAndYear, getRegistrations } from "@/features/timetable/api";
+import { getRegistrations } from "@/features/timetable/api/registration";
+import { getNowTermAndYear } from "@/features/timetable/api/term";
 import { auth } from "@/lib/auth";
 import { Box, Heading, VStack } from "@yamada-ui/react";
 import { notFound } from "next/navigation";
