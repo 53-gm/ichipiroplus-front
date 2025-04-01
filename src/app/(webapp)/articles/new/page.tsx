@@ -1,18 +1,8 @@
 import ArticleCreator from "@/features/article/components/ArticleCreater";
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { getAuthUser } from "@/lib/auth-utils";
 
 const CreateArticlePage = async () => {
-  const session = await auth();
-  if (!session?.user) {
-    redirect("/auth/login?callbackUrl=/articles/new");
-  }
-
-  const user = session.user;
-
-  if (!user.profile.is_profile_complete) {
-    redirect("/auth/register");
-  }
+  const { user } = await getAuthUser();
 
   return <ArticleCreator profileId={user.profile.profile_id} />;
 };

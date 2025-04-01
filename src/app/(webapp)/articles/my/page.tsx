@@ -1,23 +1,15 @@
 import { getArticlesByUser } from "@/features/article/api";
-import { auth } from "@/lib/auth";
-import { notFound } from "next/navigation";
+import { getAuthUser } from "@/lib/auth-utils";
 import MyArticlesClient from "./_components/MyArticlesClient";
 
 const MyArticlesPage = async () => {
-  const session = await auth();
+  const { user } = await getAuthUser();
 
-  if (!session?.user?.profile?.profile_id) {
-    return notFound();
-  }
-
-  const response = await getArticlesByUser(session.user.profile.profile_id);
+  const response = await getArticlesByUser(user.profile.profile_id);
   const articles = response.results;
 
   return (
-    <MyArticlesClient
-      articles={articles}
-      profileId={session.user.profile.profile_id}
-    />
+    <MyArticlesClient articles={articles} profileId={user.profile.profile_id} />
   );
 };
 

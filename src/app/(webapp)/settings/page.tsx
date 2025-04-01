@@ -2,19 +2,14 @@ import { getAllDepartments, getAllFaculties } from "@/features/user/api";
 import AccountSettings from "@/features/user/components/AccountSettings";
 import DisplaySettings from "@/features/user/components/DisplaySettings";
 import MyProfileEditForm from "@/features/user/components/MyProfileEditForm";
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import { getAuthUser } from "@/lib/auth-utils";
 
 interface SettingsPageProps {
   searchParams: { tab?: string };
 }
 
 const SettingsPage = async ({ searchParams }: SettingsPageProps) => {
-  const session = await auth();
-  const user = session?.user;
-  if (!user) {
-    redirect("/");
-  }
+  const { user } = await getAuthUser();
 
   const departments = await getAllDepartments();
   const faculties = await getAllFaculties();

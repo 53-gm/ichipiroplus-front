@@ -24,12 +24,12 @@ export const buildRegistrationMap = (registrations: Registration[]) => {
  */
 export const isValidTermYear = (year: number, term: number) => {
   return (
-    isNaN(year) ||
-    isNaN(term) ||
-    term < 1 ||
-    term > 4 ||
-    year < 2020 ||
-    year > new Date().getFullYear() + 1
+    !isNaN(year) ||
+    !isNaN(term) ||
+    term >= 1 ||
+    term <= 4 ||
+    year >= 2020 ||
+    year <= new Date().getFullYear() + 1
   );
 };
 
