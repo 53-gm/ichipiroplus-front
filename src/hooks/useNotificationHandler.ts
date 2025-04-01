@@ -1,13 +1,6 @@
 import { ApiError } from "@/lib/api/client";
 import { useNotice } from "@yamada-ui/react";
 
-interface NotificationOptions {
-  successTitle?: string;
-  successMessage?: string;
-  errorTitle?: string;
-  duration?: number;
-}
-
 const useNotificationHandler = () => {
   const notice = useNotice({ isClosable: true });
 
