@@ -110,6 +110,7 @@ const MyArticlesClient = ({
                         colorScheme="primary"
                       />
                     </Link>
+
                     <IconButton
                       icon={<Trash2 className="w-5 h-5" />}
                       onClick={() => handleDelete(article)}

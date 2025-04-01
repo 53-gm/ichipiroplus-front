@@ -7,8 +7,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogOverlay,
-  Divider,
   Heading,
+  Separator,
   Text,
   useDisclosure,
   VStack,
@@ -19,8 +19,11 @@ interface SettingsTabProps {
   onDeleteRegistration: () => Promise<void>;
 }
 
-const SettingsTab = ({ lecture, onDeleteRegistration }: SettingsTabProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+const LectureSettingsTab = ({
+  lecture,
+  onDeleteRegistration,
+}: SettingsTabProps) => {
+  const { open, onOpen, onClose } = useDisclosure();
 
   return (
     <VStack align="start" w="full">
@@ -30,7 +33,7 @@ const SettingsTab = ({ lecture, onDeleteRegistration }: SettingsTabProps) => {
         </Heading>
         <Text mb={6}>この講義の登録に関する設定を行います。</Text>
 
-        <Divider mb={6} />
+        <Separator mb={6} />
 
         <Box
           p={4}
@@ -52,7 +55,7 @@ const SettingsTab = ({ lecture, onDeleteRegistration }: SettingsTabProps) => {
       </Box>
 
       {/* 確認ダイアログ */}
-      <Dialog isOpen={isOpen} onClose={onClose}>
+      <Dialog open={open} onClose={onClose}>
         <DialogOverlay />
 
         <DialogBody>
@@ -81,4 +84,4 @@ const SettingsTab = ({ lecture, onDeleteRegistration }: SettingsTabProps) => {
   );
 };
 
-export default SettingsTab;
+export default LectureSettingsTab;

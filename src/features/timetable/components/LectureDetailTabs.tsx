@@ -2,7 +2,7 @@
 
 import TasksDashboard from "@/features/task/components/TaskDashboard";
 import { Task } from "@/features/task/types";
-import { deleteRegistration } from "@/features/timetable/api";
+import { deleteRegistration } from "@/features/timetable/api/registration";
 import { Registration } from "@/features/timetable/types";
 import { ApiError } from "@/lib/api/client";
 import {
@@ -14,7 +14,7 @@ import {
   useNotice,
 } from "@yamada-ui/react";
 import { useRouter } from "next/navigation";
-import SettingsTab from "../tabs/SettingsTab";
+import LectureSettingsTab from "./LectureSettingTab";
 
 interface LectureDetailTabsProps {
   registration: Registration;
@@ -73,7 +73,7 @@ const LectureDetailTabs = ({ registration, tasks }: LectureDetailTabsProps) => {
         </TabPanel>
 
         <TabPanel>
-          <SettingsTab
+          <LectureSettingsTab
             lecture={lecture}
             onDeleteRegistration={handleDeleteRegistration}
           />

@@ -1,4 +1,3 @@
-import { updateLecture } from "@/features/timetable/api";
 import {
   Lecture,
   LectureFormData,
@@ -19,6 +18,7 @@ import {
   VStack,
 } from "@yamada-ui/react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { updateLecture } from "../api/lecture";
 
 interface CustomLectureFormProps {
   lecture: Lecture;

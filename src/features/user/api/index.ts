@@ -57,24 +57,22 @@ export const updateUserProfile = async (data: ProfileFormData) => {
 
 /**
  * 全ての学部を取得
- * キャッシュは24時間
  */
 export const getAllFaculties = () => {
   return fetchApi<Faculty[]>(
     "/api/v1/users/faculties/",
-    { method: "GET", next: { revalidate: 24 * 60 * 60 } },
+    { method: "GET", next: { revalidate: 24 * 60 * 60 * 7 } },
     false
   );
 };
 
 /**
  * 全ての学科を取得
- * キャッシュは24時間
  */
 export const getAllDepartments = () => {
   return fetchApi<Department[]>(
     "/api/v1/users/departments/",
-    { method: "GET", next: { revalidate: 24 * 60 * 60 } },
+    { method: "GET", next: { revalidate: 24 * 60 * 60 * 7 } },
     false
   );
 };

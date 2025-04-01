@@ -1,4 +1,4 @@
-import { getExtensions } from "@/lib/tiptap/extensions";
+import { getExtensions } from "@/features/editor/extensions";
 import { Editor, UseEditorOptions } from "@tiptap/react";
 
 export interface ArticleEditorConfig {

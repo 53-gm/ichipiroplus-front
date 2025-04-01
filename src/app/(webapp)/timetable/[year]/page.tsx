@@ -1,4 +1,4 @@
-import { getNowTermAndYear } from "@/features/timetable/api";
+import { getNowTermAndYear } from "@/features/timetable/api/term";
 import { redirect } from "next/navigation";
 
 const TimeTablePage = async ({ params }: { params: { year: string } }) => {

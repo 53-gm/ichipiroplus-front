@@ -3,7 +3,12 @@ import MobileNav from "@/components/MobileNav";
 import { HStack, VStack } from "@yamada-ui/react";
 import { ReactNode } from "react";
 
-const WebappLayout = ({ children }: { children: ReactNode }) => {
+const WebappLayout = ({
+  children,
+}: {
+  children: ReactNode;
+  modal: ReactNode;
+}) => {
   return (
     <HStack w="full" minH="100vh" h="full" alignItems="stretch">
       <DesktopNav />

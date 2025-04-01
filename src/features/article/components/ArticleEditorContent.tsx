@@ -1,6 +1,6 @@
 import EditorBox from "@/features/editor/components/EditorBox";
-import { TableOfContents } from "@/lib/tiptap/extensions/TableOfContents";
-import { CustomBubbleMenu } from "@/lib/tiptap/menus";
+import { TableOfContents } from "@/features/editor/extensions/TableOfContents";
+import { CustomBubbleMenu } from "@/features/editor/menus";
 import { Editor, EditorContent } from "@tiptap/react";
 import { Box, Stack } from "@yamada-ui/react";
 

@@ -20,9 +20,7 @@ interface ArticleCardProps {
 }
 
 const ArticleCard = ({ article }: ArticleCardProps) => {
-  // 記事へのリンクパス
   const articlePath = `/${article.author.profile_id}/articles/${article.slug}`;
-  // 著者プロフィールへのリンクパス
   const authorProfilePath = `/${article.author.profile_id}`;
 
   return (
@@ -55,7 +53,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             />
             <VStack align="start" gap="none">
               <Text fontWeight="bold" fontSize="sm">
-                {article.author.display_name || "名前未設定"}
+                {article.author.display_name}
               </Text>
 
               <Text color="gray.500" fontSize="xs">

@@ -12,14 +12,8 @@ interface ProfilePageProps {
 
 const ProfilePage = async ({ params }: ProfilePageProps) => {
   const { profile_id } = params;
-
-  // プロフィール情報を取得
   const profileData = await getUserProfile(profile_id);
-
-  // ユーザーの記事一覧を取得
   const articlesData = await getArticlesByUser(profile_id);
-
-  // 記事数
   const articlesCount = Array.isArray(articlesData) ? articlesData.length : 0;
 
   return (

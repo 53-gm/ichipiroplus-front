@@ -20,7 +20,7 @@ const customTheme: UsageTheme = {
 };
 
 const customConfig: ThemeConfig = {
-  initialColorMode: "light",
+  initialColorMode: "system",
 };
 
 export const theme = extendTheme(customTheme)();
