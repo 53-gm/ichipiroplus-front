@@ -1,8 +1,8 @@
 import {
   Box,
   Center,
-  Heading,
   HStack,
+  Heading,
   Skeleton,
   Spacer,
   Text,

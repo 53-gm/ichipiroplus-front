@@ -3,7 +3,7 @@
 import type { Task } from "@/features/task/types";
 import type { Registration } from "@/features/timetable/types";
 import { PlusIcon } from "@yamada-ui/lucide";
-import { Box, Button, useDisclosure, VStack } from "@yamada-ui/react";
+import { Box, Button, VStack, useDisclosure } from "@yamada-ui/react";
 import { TaskProvider, useTaskContext } from "../context/TaskContext";
 import CreateTaskForm from "./CreateTaskForm";
 import DeleteCompletedTasksDialog from "./DeleteCompletedTasksDialog";

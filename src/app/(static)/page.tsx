@@ -8,8 +8,8 @@ import {
   Box,
   Button,
   Center,
-  Heading,
   HStack,
+  Heading,
   Text,
   VStack,
 } from "@yamada-ui/react";

@@ -4,8 +4,8 @@ import {
   Box,
   Button,
   Flex,
-  Heading,
   HStack,
+  Heading,
   Text,
   VStack,
 } from "@yamada-ui/react";

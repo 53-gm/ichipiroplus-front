@@ -1,4 +1,4 @@
-import { mergeAttributes, Node } from "@tiptap/core";
+import { Node, mergeAttributes } from "@tiptap/core";
 
 export interface ParagraphOptions {
   HTMLAttributes: Record<string, unknown>;

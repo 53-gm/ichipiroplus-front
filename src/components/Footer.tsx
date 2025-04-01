@@ -1,4 +1,4 @@
-import { Heading, HStack, Link, Text, VStack } from "@yamada-ui/react";
+import { HStack, Heading, Link, Text, VStack } from "@yamada-ui/react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

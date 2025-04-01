@@ -1,11 +1,11 @@
 "use client";
 import { config, theme } from "@/theme";
 import {
-  colorModeManager,
   ColorModeScript,
-  themeSchemeManager,
   ThemeSchemeScript,
   UIProvider,
+  colorModeManager,
+  themeSchemeManager,
 } from "@yamada-ui/react";
 
 const YamadaUIProvider = ({ children }: { children: React.ReactNode }) => {

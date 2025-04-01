@@ -1,4 +1,4 @@
-import { mergeAttributes, Node, nodeInputRule } from "@tiptap/core";
+import { Node, mergeAttributes, nodeInputRule } from "@tiptap/core";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 import { ResizableMediaNodeView } from "./ResizableMediaNodeView";
 

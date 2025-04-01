@@ -2,8 +2,8 @@ import type { UserProfile } from "@/features/user/types";
 import {
   Avatar,
   Box,
-  Heading,
   HStack,
+  Heading,
   Tag,
   Text,
   VStack,

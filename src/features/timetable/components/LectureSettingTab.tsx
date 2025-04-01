@@ -10,8 +10,8 @@ import {
   Heading,
   Separator,
   Text,
-  useDisclosure,
   VStack,
+  useDisclosure,
 } from "@yamada-ui/react";
 
 interface SettingsTabProps {

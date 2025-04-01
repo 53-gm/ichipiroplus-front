@@ -2,7 +2,7 @@
 
 import TaskItem from "@/features/task/components/TaskItem";
 import type { Task } from "@/features/task/types";
-import { Box, Heading, HStack, Text, VStack } from "@yamada-ui/react";
+import { Box, HStack, Heading, Text, VStack } from "@yamada-ui/react";
 import type { ReactNode } from "react";
 import { useTaskContext } from "../context/TaskContext";
 

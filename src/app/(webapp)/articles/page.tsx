@@ -1,7 +1,7 @@
 import { getArticles } from "@/features/article/api";
 import ArticleList from "@/features/article/components/ArticleList";
 import { PlusIcon } from "@yamada-ui/lucide";
-import { Button, Flex, Heading, HStack } from "@yamada-ui/react";
+import { Button, Flex, HStack, Heading } from "@yamada-ui/react";
 import Link from "next/link";
 
 interface ArticlesPageProps {

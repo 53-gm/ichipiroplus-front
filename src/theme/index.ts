@@ -2,10 +2,10 @@
 
 import type { ThemeConfig } from "@yamada-ui/react";
 import {
-  extendConfig,
-  extendTheme,
   type UIStyle,
   type UsageTheme,
+  extendConfig,
+  extendTheme,
 } from "@yamada-ui/react";
 
 const globalStyle: UIStyle = {
