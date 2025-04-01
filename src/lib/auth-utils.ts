@@ -1,5 +1,5 @@
 import { auth } from "@/lib/auth";
-import { Session, User } from "next-auth";
+import type { Session, User } from "next-auth";
 import { redirect } from "next/navigation";
 
 /**
@@ -10,8 +10,8 @@ import { redirect } from "next/navigation";
  * @returns 認証済みユーザー情報とセッション
  */
 export const getAuthUser = async (
-  redirectTo: string = "/auth/login",
-  requireCompleteProfile: boolean = true
+  redirectTo = "/auth/login",
+  requireCompleteProfile = true,
 ): Promise<{
   session: Session;
   user: User;

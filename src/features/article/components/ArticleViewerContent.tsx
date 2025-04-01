@@ -2,7 +2,7 @@
 
 import { useEditor } from "@tiptap/react";
 import { useEffect } from "react";
-import { Article } from "../types";
+import type { Article } from "../types";
 import getArticleEditorConfig from "./ArticleEditorConfig";
 import ArticleEditorContent from "./ArticleEditorContent";
 
@@ -15,7 +15,7 @@ const ArticleViewerContent = ({ article }: ArticleViewerContentProps) => {
   const editor = useEditor(
     getArticleEditorConfig({
       isEditable: false,
-    })
+    }),
   );
 
   // 記事内容を設定

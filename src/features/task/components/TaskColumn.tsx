@@ -1,9 +1,9 @@
 "use client";
 
 import TaskItem from "@/features/task/components/TaskItem";
-import { Task } from "@/features/task/types";
+import type { Task } from "@/features/task/types";
 import { Box, Heading, HStack, Text, VStack } from "@yamada-ui/react";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useTaskContext } from "../context/TaskContext";
 
 interface TaskColumnProps {
@@ -43,7 +43,7 @@ const TaskColumn = ({ title, tasks, extraHeader }: TaskColumnProps) => {
         </Box>
       ) : (
         <VStack align="stretch" maxH="lg" px={1}>
-          {tasks.map((task) => (
+          {tasks.map(task => (
             <TaskItem
               key={task.id}
               task={task}

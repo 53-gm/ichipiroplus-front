@@ -10,6 +10,7 @@ export const Commands = Extension.create({
     return {
       suggestions: {
         char: "/",
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         command: ({ editor, range, props }: any) =>
           props.command({ editor, range, props }),
       },

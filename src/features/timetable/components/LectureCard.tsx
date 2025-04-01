@@ -15,7 +15,7 @@ import {
 } from "@yamada-ui/react";
 import { useRouter } from "next/navigation";
 import { registerLecture } from "../api/registration";
-import { Lecture, Registration } from "../types";
+import type { Lecture, Registration } from "../types";
 import UpdateLectureButton from "./UpdateLectureButton";
 
 interface LectureCardProps {

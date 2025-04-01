@@ -1,6 +1,6 @@
 import DateFormat from "@/components/DateFormat";
 import UpdateLectureButton from "@/features/timetable/components/UpdateLectureButton";
-import { Registration } from "@/features/timetable/types";
+import type { Registration } from "@/features/timetable/types";
 import { auth } from "@/lib/auth";
 import {
   Card,
@@ -55,12 +55,12 @@ const LectureDetailHeader = async ({
         <Wrap gap="xs">
           {lecture.is_required && <Tag colorScheme="red">必修</Tag>}
           {lecture.is_exam && <Tag colorScheme="purple">期末試験あり</Tag>}
-          {lecture.terms.map((term) => (
+          {lecture.terms.map(term => (
             <Tag key={term.number} colorScheme="blue">
               第{term.number}ターム
             </Tag>
           ))}
-          {lecture.departments.map((dept) => (
+          {lecture.departments.map(dept => (
             <Tag key={dept.id} colorScheme="teal">
               {dept.name}
             </Tag>
@@ -78,7 +78,7 @@ const LectureDetailHeader = async ({
         <HStack>
           <Text fontWeight="bold">開講日時:</Text>
           <Wrap gap="xs">
-            {lecture.schedules.map((schedule) => (
+            {lecture.schedules.map(schedule => (
               <Tag size="sm" key={`${schedule.day}-${schedule.time}`}>
                 {["月", "火", "水", "木", "金", "土", "日"][schedule.day - 1]}曜
                 {schedule.time}限

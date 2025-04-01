@@ -1,7 +1,7 @@
 "use server";
 
 import { fetchApi } from "@/lib/api/client";
-import { Term } from "../types";
+import type { Term } from "../types";
 
 export const getNowTermAndYear = () => {
   return fetchApi<{ term: Term; year: number }>(
@@ -10,6 +10,6 @@ export const getNowTermAndYear = () => {
       method: "GET",
       next: { revalidate: 60 * 60 * 24 },
     },
-    false
+    false,
   );
 };

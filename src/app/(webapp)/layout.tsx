@@ -1,7 +1,7 @@
 import DesktopNav from "@/components/DesktopNav";
 import MobileNav from "@/components/MobileNav";
 import { HStack, VStack } from "@yamada-ui/react";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 const WebappLayout = ({
   children,

@@ -1,9 +1,9 @@
 "use client";
 
 import TasksDashboard from "@/features/task/components/TaskDashboard";
-import { Task } from "@/features/task/types";
+import type { Task } from "@/features/task/types";
 import { deleteRegistration } from "@/features/timetable/api/registration";
-import { Registration } from "@/features/timetable/types";
+import type { Registration } from "@/features/timetable/types";
 import { ApiError } from "@/lib/api/client";
 import {
   Tab,

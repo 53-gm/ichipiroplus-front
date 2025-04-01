@@ -36,7 +36,7 @@ const ArticleCreator = ({ profileId }: ArticleCreatorProps) => {
   const editor = useEditor(
     getArticleEditorConfig({
       content: "",
-    })
+    }),
   );
 
   // 新しい記事を保存
@@ -116,7 +116,7 @@ const ArticleCreator = ({ profileId }: ArticleCreatorProps) => {
         <FormControl label="タイトル" required>
           <Input
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={e => setTitle(e.target.value)}
             placeholder="タイトルを入力してください"
             size="lg"
             fontSize="2xl"

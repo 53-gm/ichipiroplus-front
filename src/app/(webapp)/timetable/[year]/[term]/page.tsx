@@ -16,8 +16,8 @@ interface TimeTablePageProps {
 }
 
 const TimeTablePage = async ({ params }: TimeTablePageProps) => {
-  const year = parseInt(params.year);
-  const term = parseInt(params.term);
+  const year = Number.parseInt(params.year);
+  const term = Number.parseInt(params.term);
 
   if (!isValidTermYear(year, term)) {
     notFound();

@@ -10,8 +10,8 @@ import {
   Text,
 } from "@yamada-ui/react";
 import { useState } from "react";
-import { Control, useController } from "react-hook-form";
-import { ProfileFormData } from "../types";
+import { type Control, useController } from "react-hook-form";
+import type { ProfileFormData } from "../types";
 
 interface IconUploadFieldProps {
   control: Control<ProfileFormData>;

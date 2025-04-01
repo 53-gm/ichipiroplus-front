@@ -7,11 +7,11 @@ import {
   getTasksByRegistrationId,
   updateTask,
 } from "@/features/task/api";
-import { Task, TaskFormData } from "@/features/task/types";
-import { Registration } from "@/features/timetable/types";
+import type { Task, TaskFormData } from "@/features/task/types";
+import type { Registration } from "@/features/timetable/types";
 import { ApiError } from "@/lib/api/client";
 import { useNotice } from "@yamada-ui/react";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, type ReactNode, useContext, useState } from "react";
 import useSWR from "swr";
 
 // タスクの状態と操作を含むコンテキスト型
@@ -122,20 +122,20 @@ export function TaskProvider({
       revalidateOnFocus: true,
       revalidateOnReconnect: true,
       dedupingInterval: 5000,
-    }
+    },
   );
 
   // フィルタリングされたタスク
-  const todoTasks = tasks?.filter((task) => task.status === 0) || [];
-  const inProgressTasks = tasks?.filter((task) => task.status === 1) || [];
-  const completedTasks = tasks?.filter((task) => task.status === 2) || [];
+  const todoTasks = tasks?.filter(task => task.status === 0) || [];
+  const inProgressTasks = tasks?.filter(task => task.status === 1) || [];
+  const completedTasks = tasks?.filter(task => task.status === 2) || [];
 
   // タスクのステータスを更新
   const updateTaskStatus = async (taskId: string, status: number) => {
     try {
       // 楽観的UI更新
-      const updatedTasks = tasks?.map((task) =>
-        task.id === taskId ? { ...task, status } : task
+      const updatedTasks = tasks?.map(task =>
+        task.id === taskId ? { ...task, status } : task,
       );
 
       mutateTasks(updatedTasks, false);
@@ -174,7 +174,7 @@ export function TaskProvider({
     try {
       const newTask = await createTask(data);
 
-      mutateTasks((current) => [...(current || []), newTask], false);
+      mutateTasks(current => [...(current || []), newTask], false);
 
       notice({
         title: "タスク作成",
@@ -205,12 +205,12 @@ export function TaskProvider({
   const editTask = async (taskId: string, data: Partial<TaskFormData>) => {
     try {
       mutateTasks(
-        tasks?.map((task) =>
+        tasks?.map(task =>
           task.id === taskId
             ? { ...task, ...data, due_date: data.due_date?.toString() ?? null }
-            : task
+            : task,
         ),
-        false
+        false,
       );
 
       // APIを呼び出して実際に更新
@@ -249,7 +249,7 @@ export function TaskProvider({
   const removeTask = async (taskId: string) => {
     try {
       // 楽観的UI更新
-      const filteredTasks = tasks?.filter((task) => task.id !== taskId);
+      const filteredTasks = tasks?.filter(task => task.id !== taskId);
       mutateTasks(filteredTasks, false);
 
       // APIを呼び出して実際に削除
@@ -288,12 +288,12 @@ export function TaskProvider({
   const removeCompletedTasks = async () => {
     if (!tasks) return false;
 
-    const completedTasks = tasks.filter((task) => task.status === 2);
+    const completedTasks = tasks.filter(task => task.status === 2);
     if (completedTasks.length === 0) return false;
 
     try {
       // 楽観的UI更新
-      const remainingTasks = tasks.filter((task) => task.status !== 2);
+      const remainingTasks = tasks.filter(task => task.status !== 2);
       mutateTasks(remainingTasks, false);
 
       // 各タスクを削除

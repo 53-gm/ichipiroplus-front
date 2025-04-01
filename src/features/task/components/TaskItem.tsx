@@ -1,6 +1,6 @@
 "use client";
 
-import { Task } from "@/features/task/types";
+import type { Task } from "@/features/task/types";
 import { format } from "@formkit/tempo";
 import {
   CircleCheckBigIcon,
@@ -200,8 +200,8 @@ const TaskItem = ({
                   {task.priority === 0
                     ? "低"
                     : task.priority === 1
-                    ? "中"
-                    : "高"}
+                      ? "中"
+                      : "高"}
                 </Badge>
               </Text>
             </Flex>

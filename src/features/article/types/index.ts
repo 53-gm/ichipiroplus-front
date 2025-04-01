@@ -1,4 +1,4 @@
-import { UserProfile } from "@/features/user/types";
+import type { UserProfile } from "@/features/user/types";
 import { z } from "zod";
 
 /**

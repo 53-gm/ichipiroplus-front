@@ -13,7 +13,7 @@ import {
   VStack,
 } from "@yamada-ui/react";
 import Link from "next/link";
-import { Article } from "../types";
+import type { Article } from "../types";
 
 interface ArticleCardProps {
   article: Article;

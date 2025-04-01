@@ -13,7 +13,7 @@ import {
   Text,
   VStack,
 } from "@yamada-ui/react";
-import { SlashMenuItem } from "./suggestions";
+import type { SlashMenuItem } from "./suggestions";
 
 interface CommandListProps {
   items: Partial<SlashMenuItem>[];
@@ -61,6 +61,7 @@ export const CommandList = React.forwardRef(
     };
 
     // 選択インデックスが変更されたらスクロール
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
       scrollToItem(selectedIndex);
     }, [selectedIndex]);
@@ -128,11 +129,11 @@ export const CommandList = React.forwardRef(
                     variant="unstyled"
                     onClick={() => selectItem(index)}
                     onMouseEnter={() => setSelectedIndex(index)}
-                    onKeyDown={(e) => e.code === "Enter" && selectItem(index)}
+                    onKeyDown={e => e.code === "Enter" && selectItem(index)}
                     key={item.title}
-                    bgColor={index == selectedIndex ? "gray.100" : ""}
+                    bgColor={index === selectedIndex ? "gray.100" : ""}
                     margin="xs"
-                    ref={(el) => {
+                    ref={el => {
                       itemRefs.current[index] = el;
                     }}
                     size="sm"
@@ -158,5 +159,5 @@ export const CommandList = React.forwardRef(
         </VStack>
       </ScrollArea>
     );
-  }
+  },
 );

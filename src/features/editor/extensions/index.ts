@@ -1,5 +1,5 @@
 import { uploadImage } from "@/features/article/api";
-import { AnyExtension } from "@tiptap/core";
+import type { AnyExtension } from "@tiptap/core";
 import Blockquote from "@tiptap/extension-blockquote";
 import Bold from "@tiptap/extension-bold";
 import BulletList from "@tiptap/extension-bullet-list";
@@ -61,7 +61,7 @@ export const getExtensions = (): AnyExtension[] => {
 
     // Resizable Media
     ResizableMedia.configure({
-      uploadFn: async (image) => {
+      uploadFn: async image => {
         const fd = new FormData();
 
         fd.append("file", image);
@@ -73,7 +73,7 @@ export const getExtensions = (): AnyExtension[] => {
     }),
 
     DropZone.configure({
-      uploadFn: async (image) => {
+      uploadFn: async image => {
         const fd = new FormData();
 
         fd.append("file", image);

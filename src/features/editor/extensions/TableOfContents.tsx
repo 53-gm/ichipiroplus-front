@@ -1,8 +1,7 @@
-/* eslint-disable */
-
-import { Editor } from "@tiptap/react";
-import { Box, Heading, HStack, Text, VStack } from "@yamada-ui/react";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import type { Editor } from "@tiptap/react";
+import { Box, HStack, Heading, Text, VStack } from "@yamada-ui/react";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface TocItem {
   id: string;
@@ -19,8 +18,10 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ editor }) => {
   const [activeId, setActiveId] = useState<string | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
+  // biome-ignore lint/complexity/noBannedTypes: <explanation>
   const debounce = (func: Function, wait: number) => {
     let timeout: ReturnType<typeof setTimeout> | null = null;
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     return (...args: any[]) => {
       if (timeout) clearTimeout(timeout);
       timeout = setTimeout(() => func(...args), wait);
@@ -32,7 +33,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ editor }) => {
 
     const items: TocItem[] = [];
 
-    editor.view.state.doc.descendants((node) => {
+    editor.view.state.doc.descendants(node => {
       if (node.type.name === "heading") {
         items.push({
           id: node.attrs.id || "",
@@ -53,9 +54,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ editor }) => {
     }
 
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
-      const intersectingEntries = entries.filter(
-        (entry) => entry.isIntersecting
-      );
+      const intersectingEntries = entries.filter(entry => entry.isIntersecting);
 
       if (intersectingEntries.length > 0) {
         const newActiveId = intersectingEntries[0].target.id;
@@ -72,7 +71,8 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ editor }) => {
     observerRef.current = new IntersectionObserver(handleIntersect, options);
 
     setTimeout(() => {
-      tocItems.forEach((item) => {
+      // biome-ignore lint/complexity/noForEach: <explanation>
+      tocItems.forEach(item => {
         if (item.id) {
           const element = document.getElementById(item.id);
           if (element) {
@@ -87,6 +87,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ editor }) => {
     };
   }, [editor, tocItems]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (!editor) return;
 
@@ -103,6 +104,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ editor }) => {
     };
   }, [editor, updateToc]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     setupIntersectionObserver();
 
@@ -123,8 +125,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ editor }) => {
     if (element) {
       setActiveId(targetId);
 
-      const newUrl =
-        window.location.pathname + window.location.search + `#${targetId}`;
+      const newUrl = `${window.location.pathname + window.location.search}#${targetId}`;
       window.history.pushState(null, "", newUrl);
 
       element.scrollIntoView({ behavior: "smooth" });
@@ -171,6 +172,7 @@ export const TableOfContents: React.FC<TableOfContentsProps> = ({ editor }) => {
           const markerSize = getMarkerSize(item.level);
 
           return (
+            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             <HStack key={index} gap="sm" pl={(item.level - 1) * 3}>
               {/* マーカー（アクティブな項目のみ青色） */}
               <Box

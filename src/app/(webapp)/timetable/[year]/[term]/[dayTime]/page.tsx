@@ -21,9 +21,9 @@ interface TimeSlotPageProps {
 }
 
 const TimeSlotPage = async ({ params }: TimeSlotPageProps) => {
-  const dayTime = parseInt(params.dayTime);
-  const year = parseInt(params.year);
-  const term = parseInt(params.term);
+  const dayTime = Number.parseInt(params.dayTime);
+  const year = Number.parseInt(params.year);
+  const term = Number.parseInt(params.term);
 
   // TODO: タブを状態管理からクエリパラメータでの管理にする
   // const tab = searchParams.tab || "tasks";

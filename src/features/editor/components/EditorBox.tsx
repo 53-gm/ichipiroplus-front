@@ -1,6 +1,7 @@
-import { Editor } from "@tiptap/react";
-import { Box, BoxProps } from "@yamada-ui/react";
-import React, { useCallback, useRef, useState } from "react";
+import type { Editor } from "@tiptap/react";
+import { Box, type BoxProps } from "@yamada-ui/react";
+import type React from "react";
+import { useCallback, useRef, useState } from "react";
 
 interface EditorBoxProps extends BoxProps {
   editor: Editor | null;
@@ -52,6 +53,7 @@ const EditorBox = ({ editor, children, ...props }: EditorBoxProps) => {
     e.stopPropagation();
   }, []);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   const handleDrop = useCallback(
     (e: React.DragEvent) => {
       const hasFiles =
@@ -68,7 +70,7 @@ const EditorBox = ({ editor, children, ...props }: EditorBoxProps) => {
       if (!view || !editor) return;
 
       const imagesAndVideos = Array.from(e.dataTransfer.files).filter(
-        ({ type }) => /image|video/i.test(type)
+        ({ type }) => /image|video/i.test(type),
       );
 
       if (imagesAndVideos.length === 0) return;
@@ -83,7 +85,8 @@ const EditorBox = ({ editor, children, ...props }: EditorBoxProps) => {
       if (!pos) {
         const endPos = editor.state.doc.content.size;
 
-        imagesAndVideos.forEach(async (file) => {
+        // biome-ignore lint/complexity/noForEach: <explanation>
+        imagesAndVideos.forEach(async file => {
           const uploadFn = editor.storage.resizableMedia?.uploadFn;
 
           if (uploadFn) {
@@ -109,7 +112,8 @@ const EditorBox = ({ editor, children, ...props }: EditorBoxProps) => {
           }
         });
       } else {
-        imagesAndVideos.forEach(async (file) => {
+        // biome-ignore lint/complexity/noForEach: <explanation>
+        imagesAndVideos.forEach(async file => {
           const uploadFn = editor.storage.resizableMedia?.uploadFn;
 
           if (uploadFn) {
@@ -136,7 +140,7 @@ const EditorBox = ({ editor, children, ...props }: EditorBoxProps) => {
         });
       }
     },
-    [editor]
+    [editor],
   );
 
   const borderStyle = isDragActive

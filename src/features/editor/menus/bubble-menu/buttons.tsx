@@ -1,6 +1,6 @@
-import { Editor } from "@tiptap/react";
+import type { Editor } from "@tiptap/react";
 import { BoldIcon, ItalicIcon } from "@yamada-ui/lucide";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 
 interface BubbleMenuItem {
   tooltip: string;

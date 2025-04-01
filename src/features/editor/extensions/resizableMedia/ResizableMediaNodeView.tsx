@@ -1,5 +1,5 @@
 import { NodeSelection } from "@tiptap/pm/state";
-import { NodeViewProps, NodeViewWrapper } from "@tiptap/react";
+import { type NodeViewProps, NodeViewWrapper } from "@tiptap/react";
 import {
   AlignCenterIcon,
   AlignLeftIcon,
@@ -14,7 +14,8 @@ import {
   Tooltip,
   useBoolean,
 } from "@yamada-ui/react";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export const ResizableMediaNodeView = ({
   node,
@@ -61,7 +62,7 @@ export const ResizableMediaNodeView = ({
         if (!node.attrs.widthPercent) {
           const initialPercent = Math.min(
             100,
-            (img.naturalWidth / containerWidth) * 100
+            (img.naturalWidth / containerWidth) * 100,
           );
           updateAttributes({ widthPercent: initialPercent });
         }
@@ -76,7 +77,7 @@ export const ResizableMediaNodeView = ({
         if (!node.attrs.widthPercent) {
           const initialPercent = Math.min(
             100,
-            (video.videoWidth / containerWidth) * 100
+            (video.videoWidth / containerWidth) * 100,
           );
           updateAttributes({ widthPercent: initialPercent });
         }
@@ -85,6 +86,7 @@ export const ResizableMediaNodeView = ({
   }, [mediaType, node.attrs.widthPercent, updateAttributes]);
 
   // メディアロード時の処理
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (!mediaRef.current) return;
 
@@ -170,7 +172,7 @@ export const ResizableMediaNodeView = ({
         widthPercent,
       });
     },
-    [isResizing, updateAttributes]
+    [isResizing, updateAttributes],
   );
 
   // リサイズ終了処理
@@ -249,8 +251,8 @@ export const ResizableMediaNodeView = ({
           node.attrs.dataAlign === "center"
             ? "center"
             : node.attrs.dataAlign === "end"
-            ? "right"
-            : "left"
+              ? "right"
+              : "left"
         }
       >
         <Box
@@ -306,7 +308,7 @@ export const ResizableMediaNodeView = ({
                 _hover={{
                   bg: "rgba(59, 130, 246, 0.1)",
                 }}
-                onClick={(e) => e.stopPropagation()}
+                onClick={e => e.stopPropagation()}
               >
                 <Box
                   position="absolute"
@@ -336,6 +338,7 @@ export const ResizableMediaNodeView = ({
                 zIndex={20}
               >
                 {mediaActions.map((action, index) => (
+                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                   <Tooltip key={index} label={action.tooltip}>
                     <IconButton
                       aria-label={action.tooltip}

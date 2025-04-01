@@ -1,4 +1,4 @@
-import { Lecture } from "@/features/timetable/types";
+import type { Lecture } from "@/features/timetable/types";
 import {
   Box,
   Button,

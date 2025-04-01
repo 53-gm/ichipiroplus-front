@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { Editor, Range } from "@tiptap/core";
+import type { Editor, Range } from "@tiptap/core";
 import { ReactRenderer } from "@tiptap/react";
 import * as fuzzysort from "fuzzysort";
 import tippy from "tippy.js";
@@ -14,7 +14,7 @@ import {
   ListOrderedIcon,
   QuoteIcon,
 } from "@yamada-ui/lucide";
-import { ReactElement } from "react";
+import type { ReactElement } from "react";
 import { stopPrevent } from "../../utils";
 import { CommandList } from "./CommandList";
 
@@ -150,7 +150,7 @@ export const suggestions = {
 
     const fuzzyResults = fuzzysort
       .go(query, SlashMenuItems, { key: "title" })
-      .map((item) => ({
+      .map(item => ({
         ...item,
       }));
 
@@ -162,9 +162,11 @@ export const suggestions = {
   render: () => {
     let component: ReactRenderer;
     let popup: { destroy: () => void }[];
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     let localProps: Record<string, any> | undefined;
 
     return {
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       onStart: (props: Record<string, any> | undefined) => {
         localProps = { ...props, event: "" };
 
@@ -186,11 +188,13 @@ export const suggestions = {
         });
       },
 
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       onUpdate(props: Record<string, any> | undefined) {
         localProps = { ...props, event: "" };
 
         component.updateProps(localProps);
 
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         (popup[0] as any).setProps({
           getReferenceClientRect: localProps.clientRect,
         });
@@ -199,9 +203,11 @@ export const suggestions = {
       onKeyDown(props: { event: KeyboardEvent }) {
         component.updateProps({ ...localProps, event: props.event });
 
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         (component.ref as any).onKeyDown({ event: props.event });
 
         if (props.event.key === "Escape") {
+          // biome-ignore lint/suspicious/noExplicitAny: <explanation>
           (popup[0] as any).hide();
 
           return true;
@@ -217,7 +223,7 @@ export const suggestions = {
       },
 
       onExit() {
-        if (popup && popup[0]) popup[0]?.destroy();
+        if (popup?.[0]) popup[0]?.destroy();
         if (component) component.destroy();
       },
     };

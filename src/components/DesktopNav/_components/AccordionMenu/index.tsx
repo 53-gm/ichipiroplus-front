@@ -5,13 +5,13 @@ import {
   Accordion,
   AccordionItem,
   AccordionPanel,
-  AccordionProps,
+  type AccordionProps,
   Box,
   VStack,
 } from "@yamada-ui/react";
 import { useState } from "react";
 import NavItem from "../NavItem";
-import { NavMenuItem } from "../getNavigationItems";
+import type { NavMenuItem } from "../getNavigationItems";
 
 interface AccordionMenuProps {
   navItems: NavMenuItem[];
@@ -20,12 +20,12 @@ interface AccordionMenuProps {
 
 const getDefaultIndexes = (
   items: NavMenuItem[],
-  pathname: string
+  pathname: string,
 ): number[] => {
   const hasActiveChild = (children?: NavMenuItem[]): boolean => {
     if (!children || children.length === 0) return false;
     return children.some(
-      (child) => child.href === pathname || hasActiveChild(child.children)
+      child => child.href === pathname || hasActiveChild(child.children),
     );
   };
 
@@ -36,14 +36,14 @@ const getDefaultIndexes = (
       }
       return -1;
     })
-    .filter((index) => index !== -1);
+    .filter(index => index !== -1);
 };
 
 const AccordionMenu = ({ navItems, pathname }: AccordionMenuProps) => {
   const defaultIndex = getDefaultIndexes(navItems, pathname);
 
   const [index, onChange] = useState<AccordionProps["index"] | undefined>(
-    undefined
+    undefined,
   );
 
   return (
@@ -58,7 +58,7 @@ const AccordionMenu = ({ navItems, pathname }: AccordionMenuProps) => {
     >
       <VStack align="start" w="full" gap="sm">
         {navItems.map(({ label, icon, href, children }, idx) => (
-          <Box w="full" key={`${label}-${idx}`}>
+          <Box w="full" key={`${label}`}>
             <AccordionItem
               label={
                 <NavItem

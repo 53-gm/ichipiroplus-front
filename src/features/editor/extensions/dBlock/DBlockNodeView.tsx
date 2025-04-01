@@ -1,9 +1,14 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
-import { NodeViewContent, NodeViewProps, NodeViewWrapper } from "@tiptap/react";
+import {
+  NodeViewContent,
+  type NodeViewProps,
+  NodeViewWrapper,
+} from "@tiptap/react";
 import { GripVerticalIcon, PlusIcon } from "@yamada-ui/lucide";
 import { Box, HStack, IconButton } from "@yamada-ui/react";
-import React, { useMemo } from "react";
+import type React from "react";
+import { useMemo } from "react";
 
 export const DBlockNodeView: React.FC<NodeViewProps> = ({
   node,

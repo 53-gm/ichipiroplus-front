@@ -57,7 +57,7 @@ export const DBlock = Node.create<DBlockOptions>({
   addCommands() {
     return {
       setDBlock:
-        (position) =>
+        position =>
         ({ state, chain }) => {
           const {
             selection: { from },

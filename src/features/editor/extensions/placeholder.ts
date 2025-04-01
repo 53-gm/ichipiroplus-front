@@ -1,5 +1,5 @@
-import { Editor, Extension } from "@tiptap/react";
-import { Node as ProsemirrorNode } from "prosemirror-model";
+import { type Editor, Extension } from "@tiptap/react";
+import type { Node as ProsemirrorNode } from "prosemirror-model";
 import { Plugin } from "prosemirror-state";
 import { Decoration, DecorationSet } from "prosemirror-view";
 

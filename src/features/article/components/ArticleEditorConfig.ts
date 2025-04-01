@@ -1,5 +1,5 @@
 import { getExtensions } from "@/features/editor/extensions";
-import { Editor, UseEditorOptions } from "@tiptap/react";
+import type { Editor, UseEditorOptions } from "@tiptap/react";
 
 export interface ArticleEditorConfig {
   isEditable?: boolean;

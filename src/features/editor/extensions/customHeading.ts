@@ -1,4 +1,4 @@
-import { CommandProps, mergeAttributes } from "@tiptap/core";
+import { type CommandProps, mergeAttributes } from "@tiptap/core";
 import Heading from "@tiptap/extension-heading";
 import { Plugin, PluginKey } from "prosemirror-state";
 
@@ -37,13 +37,13 @@ const compositionPlugin = new Plugin({
     handleDOMEvents: {
       compositionstart(view) {
         view.dispatch(
-          view.state.tr.setMeta(compositionPluginKey, { composing: true })
+          view.state.tr.setMeta(compositionPluginKey, { composing: true }),
         );
         return false;
       },
       compositionend(view) {
         view.dispatch(
-          view.state.tr.setMeta(compositionPluginKey, { composing: false })
+          view.state.tr.setMeta(compositionPluginKey, { composing: false }),
         );
         return false;
       },
@@ -93,7 +93,7 @@ export const CustomHeading = Heading.extend({
       new Plugin({
         appendTransaction: (transactions, oldState, newState) => {
           const compState = compositionPluginKey.getState(newState);
-          if (compState && compState.composing) {
+          if (compState?.composing) {
             return null;
           }
           let tr = newState.tr;

@@ -3,7 +3,7 @@
 import { fetchApi } from "@/lib/api/client";
 import { auth } from "@/lib/auth";
 import { revalidateTag } from "next/cache";
-import { Task, TaskFormData } from "../types";
+import type { Task, TaskFormData } from "../types";
 
 /**
  * 全てのタスクを取得
@@ -14,16 +14,18 @@ export const getAllTasks = async () => {
 
   if (!user) {
     throw new Error("Unauthorized");
-  } 
+  }
 
-  return fetchApi<Task[]>("/api/v1/tasks/tasks/", { method: "GET", next: {tags: [`tasks-${user.profile.profile_id}`], revalidate: 60 * 60} });
+  return fetchApi<Task[]>("/api/v1/tasks/tasks/", {
+    method: "GET",
+    next: { tags: [`tasks-${user.profile.profile_id}`], revalidate: 60 * 60 },
+  });
 };
 
 /**
  * 特定の講義に関連するタスクを取得
  */
 export const getTasksByRegistrationId = async (registrationId: string) => {
-
   const session = await auth();
   const user = session?.user;
 
@@ -33,7 +35,10 @@ export const getTasksByRegistrationId = async (registrationId: string) => {
 
   return fetchApi<Task[]>(
     `/api/v1/tasks/tasks/?registration_id=${registrationId}`,
-    { method: "GET", next: {tags: [`tasks-${user.profile.profile_id}`], revalidate: 60 * 60} }
+    {
+      method: "GET",
+      next: { tags: [`tasks-${user.profile.profile_id}`], revalidate: 60 * 60 },
+    },
   );
 };
 
@@ -41,7 +46,6 @@ export const getTasksByRegistrationId = async (registrationId: string) => {
  * 新しいタスクを作成
  */
 export const createTask = async (data: TaskFormData) => {
-
   const session = await auth();
   const user = session?.user;
 
@@ -61,7 +65,10 @@ export const createTask = async (data: TaskFormData) => {
 };
 
 // タスクの更新
-export const updateTask = async (taskId: string, data: Partial<TaskFormData>) => {
+export const updateTask = async (
+  taskId: string,
+  data: Partial<TaskFormData>,
+) => {
   const session = await auth();
   const user = session?.user;
 

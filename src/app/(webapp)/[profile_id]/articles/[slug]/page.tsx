@@ -1,7 +1,7 @@
 import { getArticleBySlug, getArticlesByUser } from "@/features/article/api";
 import ArticlesList from "@/features/article/components/ArticleList";
 import ArticleViewer from "@/features/article/components/ArticleViewer";
-import { Article } from "@/features/article/types";
+import type { Article } from "@/features/article/types";
 import { getAuthUser } from "@/lib/auth-utils";
 import { Separator } from "@yamada-ui/react";
 import { notFound } from "next/navigation";
@@ -31,7 +31,7 @@ const ArticlePage = async ({ params }: ArticlePageProps) => {
   let relatedArticles: Article[] = [];
   try {
     const { results: otherArticles } = await getArticlesByUser(profile_id);
-    relatedArticles = otherArticles.filter((a) => a.slug !== slug).slice(0, 4);
+    relatedArticles = otherArticles.filter(a => a.slug !== slug).slice(0, 4);
   } catch (error) {
     console.error("関連記事の取得に失敗しました:", error);
   }

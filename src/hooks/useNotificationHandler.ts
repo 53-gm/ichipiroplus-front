@@ -4,7 +4,7 @@ import { useNotice } from "@yamada-ui/react";
 const useNotificationHandler = () => {
   const notice = useNotice({ isClosable: true });
 
-  const handleSuccess = (message: string, title: string = "成功") => {
+  const handleSuccess = (message: string, title = "成功") => {
     notice({
       title,
       description: message,
@@ -12,7 +12,7 @@ const useNotificationHandler = () => {
     });
   };
 
-  const handleError = (error: unknown, title: string = "エラー") => {
+  const handleError = (error: unknown, title = "エラー") => {
     let errorMessage = "不明なエラーが発生しました";
 
     if (error instanceof ApiError) {
@@ -34,7 +34,7 @@ const useNotificationHandler = () => {
       successTitle?: string;
       successMessage?: string | ((data: T) => string);
       errorTitle?: string;
-    } = {}
+    } = {},
   ): Promise<T | undefined> => {
     try {
       const result = await promise;

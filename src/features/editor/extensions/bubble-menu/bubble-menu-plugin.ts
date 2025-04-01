@@ -1,13 +1,13 @@
 /* eslint-disable class-methods-use-this */
 import {
-  Editor,
+  type Editor,
   isNodeSelection,
   isTextSelection,
   posToDOMRect,
 } from "@tiptap/core";
-import { EditorState, Plugin, PluginKey } from "prosemirror-state";
-import { EditorView } from "prosemirror-view";
-import tippy, { Instance, Props } from "tippy.js";
+import { type EditorState, Plugin, PluginKey } from "prosemirror-state";
+import type { EditorView } from "prosemirror-view";
+import tippy, { type Instance, type Props } from "tippy.js";
 
 export interface BubbleMenuPluginProps {
   pluginKey: PluginKey | string;
@@ -134,8 +134,8 @@ export class BubbleMenuView {
 
     // support for CellSelections
     const { ranges } = selection;
-    const from = Math.min(...ranges.map((range) => range.$from.pos));
-    const to = Math.max(...ranges.map((range) => range.$to.pos));
+    const from = Math.min(...ranges.map(range => range.$from.pos));
+    const to = Math.max(...ranges.map(range => range.$to.pos));
 
     const shouldShow = this.shouldShow?.({
       editor: this.editor,
@@ -194,9 +194,9 @@ export class BubbleMenuView {
     if (this.tippy.popper.firstChild) {
       (this.tippy.popper.firstChild as HTMLElement).addEventListener(
         "blur",
-        (event) => {
+        event => {
           this.blurHandler({ event });
-        }
+        },
       );
     }
   }
@@ -233,6 +233,6 @@ export const BubbleMenuPlugin = (options: BubbleMenuPluginProps) => {
       typeof options.pluginKey === "string"
         ? new PluginKey(options.pluginKey)
         : options.pluginKey,
-    view: (view) => new BubbleMenuView({ view, ...options }),
+    view: view => new BubbleMenuView({ view, ...options }),
   });
 };

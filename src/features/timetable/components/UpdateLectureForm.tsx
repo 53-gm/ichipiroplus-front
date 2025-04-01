@@ -1,6 +1,6 @@
 import {
-  Lecture,
-  LectureFormData,
+  type Lecture,
+  type LectureFormData,
   lectureFormSchema,
 } from "@/features/timetable/types";
 import { getAllDepartments } from "@/features/user/api";
@@ -12,12 +12,12 @@ import {
   HStack,
   Input,
   MultiSelect,
-  SelectItem,
+  type SelectItem,
   Textarea,
-  useNotice,
   VStack,
+  useNotice,
 } from "@yamada-ui/react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { updateLecture } from "../api/lecture";
 
 interface CustomLectureFormProps {
@@ -37,28 +37,26 @@ const UpdateLectureForm = ({
   } = useForm<LectureFormData>({
     resolver: zodResolver(lectureFormSchema),
     defaultValues: {
-      schedule_ids: lecture.schedules.map((sch) => String(sch.id)),
-      department_ids: lecture.departments.map((d) => String(d.id)),
-      term_ids: lecture.terms.map((t) => String(t.number)),
+      schedule_ids: lecture.schedules.map(sch => String(sch.id)),
+      department_ids: lecture.departments.map(d => String(d.id)),
+      term_ids: lecture.terms.map(t => String(t.number)),
       ...lecture,
     },
   });
 
   const notice = useNotice({ isClosable: true });
 
-  const onSubmit: SubmitHandler<LectureFormData> = async (data) => {
+  const onSubmit: SubmitHandler<LectureFormData> = async data => {
     try {
       const parsedData = lectureFormSchema.safeParse(data);
       if (!parsedData.success) {
-        const errorMessages = parsedData.error.errors.map((err) => err.message);
+        const errorMessages = parsedData.error.errors.map(err => err.message);
         throw new Error(errorMessages.join(", "));
       }
 
       if (!parsedData.data.department_ids) {
         const allDepartments = await getAllDepartments();
-        parsedData.data.department_ids = allDepartments.map((d) =>
-          String(d.id)
-        );
+        parsedData.data.department_ids = allDepartments.map(d => String(d.id));
       }
 
       const updatedLecture = await updateLecture(lecture.id, {
@@ -92,11 +90,7 @@ const UpdateLectureForm = ({
   for (let day = 1; day <= 7; day++) {
     for (let time = 1; time <= 5; time++) {
       const item: SelectItem = {
-        label:
-          ["月", "火", "水", "木", "金", "土", "日"][day - 1] +
-          "曜日" +
-          time +
-          "限",
+        label: `${["月", "火", "水", "木", "金", "土", "日"][day - 1]}曜日${time}限`,
         value: String((day - 1) * 5 + time),
       };
       scheduleItems.push(item);

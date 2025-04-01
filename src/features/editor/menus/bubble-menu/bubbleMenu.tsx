@@ -1,4 +1,4 @@
-import { BubbleMenu, Editor } from "@tiptap/react";
+import { BubbleMenu, type Editor } from "@tiptap/react";
 import { NodeTypeDropdown } from "./NodeTypeDropdown";
 
 import { IconButton } from "@yamada-ui/react";
@@ -23,7 +23,7 @@ export const CustomBubbleMenu: React.FC<CustomBubbleMenuProps> = ({
       }}
     >
       <NodeTypeDropdown editor={editor} />
-      {generalButtons.map((btn) => {
+      {generalButtons.map(btn => {
         return (
           <IconButton
             icon={btn.icon}

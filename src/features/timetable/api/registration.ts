@@ -3,7 +3,7 @@
 import { fetchApi } from "@/lib/api/client";
 import { auth } from "@/lib/auth";
 import { revalidateTag } from "next/cache";
-import { Registration } from "../types";
+import type { Registration } from "../types";
 
 /**
  * 登録済み講義を取得
@@ -24,7 +24,7 @@ export const getRegistrations = async (year: number, term: number) => {
         tags: ["registrations", `registrations-${user.profile.profile_id}`],
         revalidate: 60 * 60 * 24,
       },
-    }
+    },
   );
 };
 
@@ -32,7 +32,7 @@ export const getRegistrations = async (year: number, term: number) => {
 export const getRegistrationBySchedule = async (
   year: number,
   term: number,
-  schedule: number
+  schedule: number,
 ) => {
   const session = await auth();
   const user = session?.user;
@@ -49,7 +49,7 @@ export const getRegistrationBySchedule = async (
         tags: ["registrations", `registrations-${user.profile.profile_id}`],
         revalidate: 60 * 60 * 24,
       },
-    }
+    },
   );
 };
 
@@ -86,7 +86,7 @@ export const registerLecture = async (lectureId: string, year: number) => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ lecture_id: lectureId, year }),
-    }
+    },
   );
 
   revalidateTag(`registrations-${user.profile.profile_id}`);
@@ -108,7 +108,7 @@ export const deleteRegistration = async (registrationId: string) => {
     `/api/v1/academics/registrations/${registrationId}/`,
     {
       method: "DELETE",
-    }
+    },
   );
 
   revalidateTag(`registrations-${user.profile.profile_id}`);

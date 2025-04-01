@@ -3,7 +3,12 @@
 import { fetchApi } from "@/lib/api/client";
 import { unstable_update } from "@/lib/auth";
 import { revalidateTag } from "next/cache";
-import { Department, Faculty, ProfileFormData, UserProfile } from "../types";
+import type {
+  Department,
+  Faculty,
+  ProfileFormData,
+  UserProfile,
+} from "../types";
 
 /**
  * プロフィールIDからユーザープロフィールを取得
@@ -15,12 +20,12 @@ export const getUserProfile = (profileId: string) => {
       method: "GET",
       next: { tags: [`profile-${profileId}`], revalidate: 24 * 60 * 60 },
     },
-    false
+    false,
   );
 };
 
 export const deleteAccount = async () => {
-  await fetchApi<void>(`/api/v1/auth/delete-account/`, {
+  await fetchApi<void>("/api/v1/auth/delete-account/", {
     method: "DELETE",
   });
 };
@@ -29,11 +34,11 @@ export const deleteAccount = async () => {
  * プロフィールを更新
  */
 export const updateUserProfile = async (data: ProfileFormData) => {
-  if (data.faculty_id == "undefined") {
+  if (data.faculty_id === "undefined") {
     data.faculty_id = undefined;
   }
 
-  if (data.department_id == "undefined") {
+  if (data.department_id === "undefined") {
     data.department_id = undefined;
   }
 
@@ -43,7 +48,7 @@ export const updateUserProfile = async (data: ProfileFormData) => {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
-    }
+    },
   );
 
   revalidateTag(`profile-${updatedProfile.profile_id}`);
@@ -62,7 +67,7 @@ export const getAllFaculties = () => {
   return fetchApi<Faculty[]>(
     "/api/v1/users/faculties/",
     { method: "GET", next: { revalidate: 24 * 60 * 60 * 7 } },
-    false
+    false,
   );
 };
 
@@ -73,6 +78,6 @@ export const getAllDepartments = () => {
   return fetchApi<Department[]>(
     "/api/v1/users/departments/",
     { method: "GET", next: { revalidate: 24 * 60 * 60 * 7 } },
-    false
+    false,
   );
 };

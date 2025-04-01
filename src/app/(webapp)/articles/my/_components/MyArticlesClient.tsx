@@ -1,7 +1,7 @@
 "use client";
 
 import { deleteArticle, getArticlesByUser } from "@/features/article/api";
-import { Article } from "@/features/article/types";
+import type { Article } from "@/features/article/types";
 import { FilePenIcon, Trash2Icon } from "@yamada-ui/lucide";
 import {
   Button,
@@ -40,10 +40,10 @@ const MyArticlesClient = ({
 }: MyArticlesClientProps) => {
   const { data: articles = initialArticles, mutate } = useSWR<Article[]>(
     ["my-articles", profileId],
-    () => getArticlesByUser(profileId).then((res) => res.results),
+    () => getArticlesByUser(profileId).then(res => res.results),
     {
       fallbackData: initialArticles,
-    }
+    },
   );
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
@@ -58,7 +58,7 @@ const MyArticlesClient = ({
     try {
       await deleteArticle(selectedArticle);
       await mutate(
-        articles.filter((article) => article.id !== selectedArticle.id)
+        articles.filter(article => article.id !== selectedArticle.id),
       );
       onClose();
     } catch (error) {
@@ -81,7 +81,7 @@ const MyArticlesClient = ({
             </Tr>
           </Thead>
           <Tbody>
-            {articles.map((article) => (
+            {articles.map(article => (
               <Tr key={article.id}>
                 <Td>
                   <Link href={`/${profileId}/articles/${article.slug}`}>

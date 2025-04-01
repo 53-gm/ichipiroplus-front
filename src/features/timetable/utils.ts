@@ -1,4 +1,4 @@
-import { Registration } from "./types";
+import type { Registration } from "./types";
 
 /**
  * 講義登録情報から時間割マップを構築する
@@ -7,8 +7,10 @@ import { Registration } from "./types";
  */
 export const buildRegistrationMap = (registrations: Registration[]) => {
   const map = new Map<number, Registration>();
-  registrations.forEach((registration) => {
-    registration.lecture.schedules.forEach((sch) => {
+  // biome-ignore lint/complexity/noForEach: <explanation>
+  registrations.forEach(registration => {
+    // biome-ignore lint/complexity/noForEach: <explanation>
+    registration.lecture.schedules.forEach(sch => {
       const key = (sch.day - 1) * 5 + sch.time;
       map.set(key, registration);
     });
@@ -24,8 +26,8 @@ export const buildRegistrationMap = (registrations: Registration[]) => {
  */
 export const isValidTermYear = (year: number, term: number) => {
   return (
-    !isNaN(year) ||
-    !isNaN(term) ||
+    !Number.isNaN(year) ||
+    !Number.isNaN(term) ||
     term >= 1 ||
     term <= 4 ||
     year >= 2020 ||

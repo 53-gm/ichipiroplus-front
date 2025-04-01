@@ -4,8 +4,8 @@ import type { ThemeConfig } from "@yamada-ui/react";
 import {
   extendConfig,
   extendTheme,
-  UIStyle,
-  UsageTheme,
+  type UIStyle,
+  type UsageTheme,
 } from "@yamada-ui/react";
 
 const globalStyle: UIStyle = {

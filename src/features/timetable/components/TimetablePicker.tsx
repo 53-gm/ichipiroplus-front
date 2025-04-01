@@ -28,7 +28,7 @@ const TimetablePicker = ({ year, term }: TimetablePickerProps) => {
         allowInput={false}
         clearable={false}
         value={new Date(new Date().setFullYear(year))}
-        onChange={(value) => value && handleYearChange(value)}
+        onChange={value => value && handleYearChange(value)}
       />
 
       <Select value={String(term)} onChange={handleTermChange}>

@@ -1,7 +1,7 @@
 import MyProfileEditForm from "@/features/user/components/MyProfileEditForm";
-import { Department, Faculty } from "@/features/user/types";
+import type { Department, Faculty } from "@/features/user/types";
 import { Card, CardBody, CardHeader, Heading } from "@yamada-ui/react";
-import { User } from "next-auth";
+import type { User } from "next-auth";
 import { useRouter } from "next/navigation";
 
 interface StepProfileProps {

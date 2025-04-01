@@ -1,7 +1,8 @@
-import { NodeViewProps, NodeViewWrapper } from "@tiptap/react";
+import { type NodeViewProps, NodeViewWrapper } from "@tiptap/react";
 import { UploadIcon } from "@yamada-ui/lucide";
 import { Box, Center, Input, Text } from "@yamada-ui/react";
-import React, { useCallback, useRef, useState } from "react";
+import type React from "react";
+import { useCallback, useRef, useState } from "react";
 
 export const DropZoneNodeView: React.FC<NodeViewProps> = ({
   editor,
@@ -35,7 +36,7 @@ export const DropZoneNodeView: React.FC<NodeViewProps> = ({
         setIsDragActive(true);
       }
     },
-    [isDragActive]
+    [isDragActive],
   );
 
   const processFiles = useCallback(
@@ -43,8 +44,8 @@ export const DropZoneNodeView: React.FC<NodeViewProps> = ({
       if (!files || files.length === 0) return;
 
       // Process only images
-      const imageFiles = Array.from(files).filter((file) =>
-        file.type.startsWith("image/")
+      const imageFiles = Array.from(files).filter(file =>
+        file.type.startsWith("image/"),
       );
 
       if (imageFiles.length === 0) return;
@@ -65,6 +66,7 @@ export const DropZoneNodeView: React.FC<NodeViewProps> = ({
 
         // Upload each file and insert as ResizableMedia
         for (const file of imageFiles) {
+          // biome-ignore lint/suspicious/noImplicitAnyLet: <explanation>
           let src;
 
           if (uploadFn) {
@@ -74,7 +76,7 @@ export const DropZoneNodeView: React.FC<NodeViewProps> = ({
           } else {
             // Fallback to using ResizableMedia's upload function as a workaround
             console.log(
-              "No uploadFn found in dropZone storage, trying to use ResizableMedia upload function"
+              "No uploadFn found in dropZone storage, trying to use ResizableMedia upload function",
             );
 
             // Try to access ResizableMedia's upload function
@@ -86,7 +88,7 @@ export const DropZoneNodeView: React.FC<NodeViewProps> = ({
             } else {
               // Last resort fallback
               console.error(
-                "No upload function available, using placeholder image"
+                "No upload function available, using placeholder image",
               );
               src = "https://source.unsplash.com/8xznAGy4HcY/800x400";
             }
@@ -111,7 +113,7 @@ export const DropZoneNodeView: React.FC<NodeViewProps> = ({
         setIsUploading(false);
       }
     },
-    [editor, getPos, node.nodeSize, uploadFn]
+    [editor, getPos, node.nodeSize, uploadFn],
   );
 
   const handleDrop = useCallback(
@@ -123,7 +125,7 @@ export const DropZoneNodeView: React.FC<NodeViewProps> = ({
       const { files } = e.dataTransfer;
       processFiles(files);
     },
-    [processFiles]
+    [processFiles],
   );
 
   const handleFileChange = useCallback(
@@ -131,7 +133,7 @@ export const DropZoneNodeView: React.FC<NodeViewProps> = ({
       const { files } = e.target;
       processFiles(files);
     },
-    [processFiles]
+    [processFiles],
   );
 
   const handleClickUpload = () => {

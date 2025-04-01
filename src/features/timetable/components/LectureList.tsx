@@ -1,4 +1,4 @@
-import { Lecture } from "@/features/timetable/types";
+import type { Lecture } from "@/features/timetable/types";
 import { auth } from "@/lib/auth";
 import { Grid, GridItem, Text } from "@yamada-ui/react";
 import { notFound } from "next/navigation";
@@ -30,11 +30,11 @@ const LectureList = async ({ lectures, year }: LectureListProps) => {
           gap="md"
           w="full"
         >
-          {lectures.map((lecture) => {
+          {lectures.map(lecture => {
             //公開でない && 講義作成者でない 場合は表示しない
             if (
               !lecture.is_public &&
-              user.profile.profile_id != lecture.owner?.profile_id
+              user.profile.profile_id !== lecture.owner?.profile_id
             ) {
               return;
             }

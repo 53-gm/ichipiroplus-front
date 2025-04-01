@@ -1,6 +1,6 @@
-import { PaginatedResponse } from "@/types/api";
+import type { PaginatedResponse } from "@/types/api";
 import { Box, Grid, GridItem, Heading, Text, VStack } from "@yamada-ui/react";
-import { Article } from "../types";
+import type { Article } from "../types";
 import ArticleCard from "./ArticleCard";
 import ArticlePagination from "./ArticlePagination";
 
@@ -37,7 +37,7 @@ const ArticlesList = ({
             gap="md"
             w="full"
           >
-            {articles.map((article) => (
+            {articles.map(article => (
               <GridItem key={article.slug}>
                 <ArticleCard article={article} />
               </GridItem>

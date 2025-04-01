@@ -2,7 +2,7 @@
 
 import { fetchApi } from "@/lib/api/client";
 import { revalidateTag } from "next/cache";
-import { Lecture, LectureFormData } from "../types";
+import type { Lecture, LectureFormData } from "../types";
 
 /**
  * 全ての講義を取得（フィルタリング可能）
@@ -42,11 +42,11 @@ export const getLectureById = (lectureId: string) => {
 export const getLecturesByTimeAndTerm = (
   day: number,
   time: number,
-  term: number
+  term: number,
 ) => {
   return fetchApi<Lecture[]>(
     `/api/v1/academics/lectures/?day=${day}&time=${time}&terms=${term}`,
-    { method: "GET" }
+    { method: "GET" },
   );
 };
 
@@ -70,7 +70,7 @@ export const createLecture = async (data: LectureFormData) => {
  */
 export const updateLecture = async (
   lectureId: string,
-  data: Partial<LectureFormData>
+  data: Partial<LectureFormData>,
 ) => {
   const response = await fetchApi<Lecture>(
     `/api/v1/academics/lectures/${lectureId}/`,
@@ -78,12 +78,12 @@ export const updateLecture = async (
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
-    }
+    },
   );
 
   revalidateTag(`lecture-${response.id}`);
-  revalidateTag(`lectures`);
-  revalidateTag(`registrations`);
+  revalidateTag("lectures");
+  revalidateTag("registrations");
 
   return response;
 };
