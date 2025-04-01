@@ -14,7 +14,7 @@ import {
   useNotice,
 } from "@yamada-ui/react";
 import { useRouter } from "next/navigation";
-import SettingsTab from "../tabs/SettingsTab";
+import LectureSettingsTab from "./LectureSettingTab";
 
 interface LectureDetailTabsProps {
   registration: Registration;
@@ -73,7 +73,7 @@ const LectureDetailTabs = ({ registration, tasks }: LectureDetailTabsProps) => {
         </TabPanel>
 
         <TabPanel>
-          <SettingsTab
+          <LectureSettingsTab
             lecture={lecture}
             onDeleteRegistration={handleDeleteRegistration}
           />
