@@ -55,6 +55,10 @@ const UserMenu = async () => {
             <Link href="/">
               <MenuItem>サポート</MenuItem>
             </Link>
+
+            <Link href="/settings?tab=notification">
+              <MenuItem>通知</MenuItem>
+            </Link>
           </MenuGroup>
 
           {userProfile ? (
