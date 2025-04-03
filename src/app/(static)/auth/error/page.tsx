@@ -11,8 +11,8 @@ import {
   CardHeader,
   Center,
   Container,
-  Heading,
   HStack,
+  Heading,
   Text,
   VStack,
 } from "@yamada-ui/react";

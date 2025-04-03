@@ -1,7 +1,11 @@
 "use client";
 
-import { Task, TaskFormData, taskFormSchema } from "@/features/task/types";
-import { Registration } from "@/features/timetable/types";
+import {
+  type Task,
+  type TaskFormData,
+  taskFormSchema,
+} from "@/features/task/types";
+import type { Registration } from "@/features/timetable/types";
 import { useTaskContext } from "../context/TaskContext";
 
 import { ApiError } from "@/lib/api/client";
@@ -19,13 +23,13 @@ import {
   Radio,
   RadioGroup,
   Select,
-  SelectItem,
+  type SelectItem,
   Textarea,
-  useNotice,
   VStack,
+  useNotice,
 } from "@yamada-ui/react";
 import { useEffect, useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 
 interface EditTaskModalProps {
   isOpen: boolean;
@@ -80,10 +84,10 @@ const EditTaskModal = ({
   }, [task, reset]);
 
   const lectureItems: SelectItem[] | undefined = registrations?.map(
-    (registration) => ({
+    registration => ({
       label: registration.lecture.name,
       value: String(registration.id),
-    })
+    }),
   );
 
   const onSubmit: SubmitHandler<TaskFormData> = async (data: TaskFormData) => {
@@ -147,7 +151,7 @@ const EditTaskModal = ({
                       {...field}
                       items={lectureItems}
                       value={field.value || undefined}
-                      onChange={(value) => field.onChange(value)}
+                      onChange={value => field.onChange(value)}
                     />
                   )}
                 />
@@ -175,7 +179,7 @@ const EditTaskModal = ({
                     placeholder="YYYY/MM/DD"
                     {...field}
                     value={field.value || undefined}
-                    onChange={(value) => field.onChange(value)}
+                    onChange={value => field.onChange(value)}
                   />
                 )}
               />
@@ -191,7 +195,7 @@ const EditTaskModal = ({
                   <RadioGroup
                     {...field}
                     value={String(field.value)}
-                    onChange={(value) => field.onChange(Number(value))}
+                    onChange={value => field.onChange(Number(value))}
                   >
                     <Radio value="0">低</Radio>
                     <Radio value="1">中</Radio>
@@ -211,7 +215,7 @@ const EditTaskModal = ({
                   <RadioGroup
                     {...field}
                     value={String(field.value)}
-                    onChange={(value) => field.onChange(Number(value))}
+                    onChange={value => field.onChange(Number(value))}
                   >
                     <Radio value="0">未着手</Radio>
                     <Radio value="1">進行中</Radio>

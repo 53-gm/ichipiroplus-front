@@ -2,10 +2,10 @@
 
 import type { ThemeConfig } from "@yamada-ui/react";
 import {
+  type UIStyle,
+  type UsageTheme,
   extendConfig,
   extendTheme,
-  UIStyle,
-  UsageTheme,
 } from "@yamada-ui/react";
 
 const globalStyle: UIStyle = {
@@ -20,7 +20,7 @@ const customTheme: UsageTheme = {
 };
 
 const customConfig: ThemeConfig = {
-  initialColorMode: "light",
+  initialColorMode: "system",
 };
 
 export const theme = extendTheme(customTheme)();

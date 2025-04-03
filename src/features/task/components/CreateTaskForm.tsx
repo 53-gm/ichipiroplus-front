@@ -1,7 +1,11 @@
 "use client";
 
-import { Task, TaskFormData, taskFormSchema } from "@/features/task/types";
-import { Registration } from "@/features/timetable/types";
+import {
+  type Task,
+  type TaskFormData,
+  taskFormSchema,
+} from "@/features/task/types";
+import type { Registration } from "@/features/timetable/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DatePicker } from "@yamada-ui/calendar";
 import {
@@ -12,14 +16,14 @@ import {
   Radio,
   RadioGroup,
   Select,
-  SelectItem,
+  type SelectItem,
   Tag,
   Textarea,
   VStack,
 } from "@yamada-ui/react";
 import "dayjs/locale/ja";
 import { useState } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import { useTaskContext } from "../context/TaskContext";
 
 interface CreateTaskFormProps {
@@ -54,13 +58,13 @@ const CreateTaskForm = ({
   });
 
   const lectureItems: SelectItem[] | undefined = registrations?.map(
-    (registration) => ({
+    registration => ({
       label: registration.lecture.name,
       value: String(registration.id),
-    })
+    }),
   );
 
-  const handleFormSubmit: SubmitHandler<TaskFormData> = async (data) => {
+  const handleFormSubmit: SubmitHandler<TaskFormData> = async data => {
     setIsSubmitting(true);
     try {
       // defaultLectureIdが設定されていて、lecture_idが未設定の場合はdefaultLectureIdを使用
@@ -114,7 +118,7 @@ const CreateTaskForm = ({
                   {...field}
                   items={lectureItems}
                   value={field.value || undefined}
-                  onChange={(value) => field.onChange(value)}
+                  onChange={value => field.onChange(value)}
                 />
               )}
             />
@@ -142,7 +146,7 @@ const CreateTaskForm = ({
                 placeholder="YYYY/MM/DD"
                 {...field}
                 value={field.value || undefined}
-                onChange={(value) => field.onChange(value)}
+                onChange={value => field.onChange(value)}
               />
             )}
           />
@@ -159,7 +163,7 @@ const CreateTaskForm = ({
                 direction="row"
                 {...field}
                 value={String(field.value)}
-                onChange={(value) => field.onChange(Number(value))}
+                onChange={value => field.onChange(Number(value))}
               >
                 <Radio value="0">低</Radio>
                 <Radio value="1">中</Radio>

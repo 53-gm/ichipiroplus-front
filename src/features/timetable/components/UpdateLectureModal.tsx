@@ -6,7 +6,7 @@ import {
   ModalCloseButton,
   ModalHeader,
 } from "@yamada-ui/react";
-import { Lecture } from "../types";
+import type { Lecture } from "../types";
 import UpdateLectureForm from "./UpdateLectureForm";
 
 interface UpdateLectureModalProps {

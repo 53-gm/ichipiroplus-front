@@ -1,7 +1,7 @@
 "use client";
 
-import { Stepper, Steps, useSteps } from "@yamada-ui/react";
-import { ReactElement } from "react";
+import { Stepper, type Steps, useSteps } from "@yamada-ui/react";
+import type { ReactElement } from "react";
 
 interface RegistrationStepperProps {
   renderItem: (props: {

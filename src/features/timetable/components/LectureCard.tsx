@@ -1,6 +1,6 @@
 "use client";
 
-import { ApiError } from "@/lib/api/client";
+import useNotificationHandler from "@/hooks/useNotificationHandler";
 import {
   Button,
   Card,
@@ -11,12 +11,11 @@ import {
   Tag,
   Text,
   Tooltip,
-  useNotice,
   VStack,
 } from "@yamada-ui/react";
 import { useRouter } from "next/navigation";
-import { registerLecture } from "../api";
-import { Lecture } from "../types";
+import { registerLecture } from "../api/registration";
+import type { Lecture, Registration } from "../types";
 import UpdateLectureButton from "./UpdateLectureButton";
 
 interface LectureCardProps {
@@ -26,32 +25,19 @@ interface LectureCardProps {
 }
 
 const LectureCard = ({ lecture, userProfileId, year }: LectureCardProps) => {
-  const notice = useNotice({ isClosable: true });
+  const { withNotification } = useNotificationHandler();
   const router = useRouter();
 
   const handleRegister = async (id: string) => {
-    try {
-      const register = await registerLecture(id, year);
-      notice({
-        title: "通知",
-        description: `${register.lecture.name}を登録しました`,
-        status: "success",
-      });
+    const register = await withNotification(registerLecture(id, year), {
+      successTitle: "登録完了",
+      successMessage: (data: Registration) =>
+        `${data.lecture.name}を登録しました`,
+    });
+
+    // 登録した講義を反映させるためのリフレッシュ
+    if (register) {
       router.refresh();
-    } catch (error) {
-      if (error instanceof ApiError) {
-        notice({
-          title: "エラー",
-          description: error.message,
-          status: "error",
-        });
-      } else {
-        notice({
-          title: "エラー",
-          description: "不明なエラーが発生しました",
-          status: "error",
-        });
-      }
     }
   };
 

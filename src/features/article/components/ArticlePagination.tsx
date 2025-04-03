@@ -21,7 +21,7 @@ const ArticlePagination = ({
     <Pagination
       page={currentPage}
       total={totalPages}
-      onChange={(page) => {
+      onChange={page => {
         window.location.href = createPageUrl(page);
       }}
       colorScheme="primary"

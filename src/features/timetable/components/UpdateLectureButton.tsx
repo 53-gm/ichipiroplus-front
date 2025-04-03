@@ -2,7 +2,7 @@
 
 import { FilePenIcon } from "@yamada-ui/lucide";
 import { IconButton, useDisclosure } from "@yamada-ui/react";
-import { Lecture } from "../types";
+import type { Lecture } from "../types";
 import UpdateLectureModal from "./UpdateLectureModal";
 
 interface UpdateLectureButtonProps {
@@ -18,7 +18,7 @@ const UpdateLectureButton = ({
   return (
     <>
       {(lecture.is_public_editable ||
-        lecture.owner?.profile_id == userProfileId) && (
+        lecture.owner?.profile_id === userProfileId) && (
         <IconButton icon={<FilePenIcon />} variant="outline" onClick={onOpen} />
       )}
       <UpdateLectureModal open={open} onClose={onClose} lecture={lecture} />

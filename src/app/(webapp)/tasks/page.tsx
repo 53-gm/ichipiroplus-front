@@ -1,21 +1,11 @@
 import { getAllTasks } from "@/features/task/api";
 import TasksDashboard from "@/features/task/components/TaskDashboard";
-import { getNowTermAndYear, getRegistrations } from "@/features/timetable/api";
-import { auth } from "@/lib/auth";
+import { getRegistrations } from "@/features/timetable/api/registration";
+import { getNowTermAndYear } from "@/features/timetable/api/term";
 import { Box, Heading, VStack } from "@yamada-ui/react";
-import { notFound } from "next/navigation";
 
 const TasksPage = async () => {
-  // 現在のユーザー情報を取得
-  const session = await auth();
-  const user = session?.user;
   const { term, year } = await getNowTermAndYear();
-
-  if (!user) {
-    notFound();
-  }
-
-  // 全てのタスクを取得
   const tasks = await getAllTasks();
   const registrations = await getRegistrations(year, term.number);
 

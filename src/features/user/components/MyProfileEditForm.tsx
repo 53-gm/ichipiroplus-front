@@ -2,11 +2,11 @@
 
 import { updateUserProfile } from "@/features/user/api";
 import {
-  Department,
-  Faculty,
-  ProfileFormData,
+  type Department,
+  type Faculty,
+  type ProfileFormData,
   ProfileFormSchema,
-  UserProfile,
+  type UserProfile,
 } from "@/features/user/types";
 import { ApiError } from "@/lib/api/client";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,14 +16,14 @@ import {
   Input,
   NumberInput,
   Select,
-  SelectItem,
+  type SelectItem,
   Tag,
   Text,
   Textarea,
-  useNotice,
   VStack,
+  useNotice,
 } from "@yamada-ui/react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import IconUploadField from "./IconUploadField";
 
 interface MyProfileEditFormProps {
@@ -64,26 +64,26 @@ const MyProfileEditForm = ({
     isClosable: true,
   });
 
-  const facultyItems: SelectItem[] = faculties.map((faculty) => ({
+  const facultyItems: SelectItem[] = faculties.map(faculty => ({
     label: faculty.name,
     value: String(faculty.id),
   }));
 
   const availableDepartments = departments.filter(
-    (department) => String(department.faculty.id) == watch("faculty_id")
+    department => String(department.faculty.id) === watch("faculty_id"),
   );
   const departmentItems: SelectItem[] = availableDepartments.map(
-    (department) => ({
+    department => ({
       label: department.name,
       value: String(department.id),
-    })
+    }),
   );
 
-  const onSubmit: SubmitHandler<ProfileFormData> = async (data) => {
+  const onSubmit: SubmitHandler<ProfileFormData> = async data => {
     try {
       const parsedData = ProfileFormSchema.safeParse(data);
       if (!parsedData.success) {
-        const errorMessages = parsedData.error.errors.map((err) => err.message);
+        const errorMessages = parsedData.error.errors.map(err => err.message);
         throw new Error(errorMessages.join(", "));
       }
 
@@ -209,11 +209,7 @@ const MyProfileEditForm = ({
         invalid={!!errors.grade}
         label="学年"
         errorMessage={errors.grade?.message}
-        helperMessage={
-          <>
-            <Text>時間割機能を使用するために必要です</Text>
-          </>
-        }
+        helperMessage={<Text>時間割機能を使用するために必要です</Text>}
       >
         <Controller
           name="grade"
@@ -223,7 +219,7 @@ const MyProfileEditForm = ({
               {...field}
               min={1}
               max={4}
-              onChange={(value) => field.onChange(Number(value))}
+              onChange={value => field.onChange(Number(value))}
             />
           )}
         />

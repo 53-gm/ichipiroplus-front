@@ -1,6 +1,6 @@
 import { format } from "@formkit/tempo";
 import { HStack, Text } from "@yamada-ui/react";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 interface DateFormatProps {
   createdAt: string;

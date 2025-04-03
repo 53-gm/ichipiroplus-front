@@ -1,8 +1,7 @@
 import { getArticles } from "@/features/article/api";
 import ArticleList from "@/features/article/components/ArticleList";
-import { auth } from "@/lib/auth";
 import { PlusIcon } from "@yamada-ui/lucide";
-import { Button, Flex, Heading, HStack } from "@yamada-ui/react";
+import { Button, Flex, HStack, Heading } from "@yamada-ui/react";
 import Link from "next/link";
 
 interface ArticlesPageProps {
@@ -12,7 +11,6 @@ interface ArticlesPageProps {
 const ArticlesPage = async ({ searchParams }: ArticlesPageProps) => {
   const page = searchParams.page ? Number(searchParams.page) : 1;
   const articles = await getArticles(page);
-  const currentUser = await auth();
 
   return (
     <Flex direction="column" w="full" gap={6}>
@@ -27,15 +25,13 @@ const ArticlesPage = async ({ searchParams }: ArticlesPageProps) => {
           記事一覧
         </Heading>
 
-        {currentUser && (
-          <HStack>
-            <Link href="/articles/new" passHref>
-              <Button colorScheme="blue" leftIcon={<PlusIcon />}>
-                新規記事
-              </Button>
-            </Link>
-          </HStack>
-        )}
+        <HStack>
+          <Link href="/articles/new" passHref>
+            <Button colorScheme="blue" startIcon={<PlusIcon />}>
+              新規記事
+            </Button>
+          </Link>
+        </HStack>
       </Flex>
 
       <ArticleList data={articles} />

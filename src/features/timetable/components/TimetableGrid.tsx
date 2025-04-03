@@ -1,4 +1,4 @@
-import { Registration } from "@/features/timetable/types";
+import type { Registration } from "@/features/timetable/types";
 import { Grid, GridItem, Text, VStack } from "@yamada-ui/react";
 import Link from "next/link";
 import React from "react";
@@ -37,7 +37,7 @@ const TimeTableGrid = ({
       minH="75vh"
     >
       {/* 曜日ヘッダー */}
-      {DAYS.map((day) => (
+      {DAYS.map(day => (
         <GridItem key={day} textAlign={"center"} alignContent={"center"}>
           <Text>{["月", "火", "水", "木", "金", "土", "日"][day - 1]}曜日</Text>
         </GridItem>
@@ -45,9 +45,9 @@ const TimeTableGrid = ({
       <GridItem display={{ base: "block", md: "none" }} />
 
       {/* 講義セル */}
-      {TIMES.map((time) => (
+      {TIMES.map(time => (
         <React.Fragment key={time}>
-          {DAYS.map((day) => {
+          {DAYS.map(day => {
             const key = (day - 1) * MAX_TIME + time;
             const lecture = registrationsMap.get(key)?.lecture;
             return (

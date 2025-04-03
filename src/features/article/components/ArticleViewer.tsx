@@ -1,7 +1,7 @@
 "use client";
 
 import { VStack } from "@yamada-ui/react";
-import { Article } from "../types";
+import type { Article } from "../types";
 import ArticleViewerContent from "./ArticleViewerContent";
 import ArticleViewerHeader from "./ArticleViewerHeader";
 

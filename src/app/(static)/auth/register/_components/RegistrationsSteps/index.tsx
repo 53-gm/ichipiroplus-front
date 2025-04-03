@@ -1,8 +1,8 @@
 // RegistrationSteps.tsx
 "use client";
 
-import { Department, Faculty } from "@/features/user/types";
-import { User } from "next-auth";
+import type { Department, Faculty } from "@/features/user/types";
+import type { User } from "next-auth";
 import RegistrationStepper from "../RegistrationStepper";
 import StepIntro from "../StepIntro";
 import StepProfile from "../StepProfile";

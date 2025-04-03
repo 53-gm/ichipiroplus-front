@@ -9,10 +9,10 @@ import {
 } from "@yamada-ui/lucide";
 import {
   Box,
-  Component,
+  type Component,
   HStack,
   Icon,
-  IconProps,
+  type IconProps,
   Text,
   VStack,
 } from "@yamada-ui/react";
@@ -71,7 +71,7 @@ const MobileNav = () => {
       display={{ base: "none", md: "block" }}
     >
       <HStack justify="space-around" px="sm" className="pb-safe">
-        {navItems.map((item) => {
+        {navItems.map(item => {
           const isActive =
             pathname === item.href || pathname.startsWith(`${item.href}/`);
 

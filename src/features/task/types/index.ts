@@ -1,4 +1,4 @@
-import { Registration } from "@/features/timetable/types";
+import type { Registration } from "@/features/timetable/types";
 import { z } from "zod";
 
 /**

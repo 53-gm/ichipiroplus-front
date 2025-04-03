@@ -4,13 +4,13 @@ import {
   Box,
   Button,
   Flex,
-  Heading,
   HStack,
+  Heading,
   Text,
   VStack,
 } from "@yamada-ui/react";
 import Link from "next/link";
-import { Article } from "../types";
+import type { Article } from "../types";
 
 interface ArticleViewerHeaderProps {
   article: Article;

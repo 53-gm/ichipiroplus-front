@@ -1,9 +1,11 @@
-import {
-  getLectures,
-  getRegistrationBySchedule,
-} from "@/features/timetable/api";
+import { getLectures } from "@/features/timetable/api/lecture";
+import { getRegistrationBySchedule } from "@/features/timetable/api/registration";
+import LectureDetail from "@/features/timetable/components/LectureDetail";
 import LectureList from "@/features/timetable/components/LectureList";
-import LectureDetail from "./_components/LectureDetail/LectureDetail/indext";
+import {
+  getDayTimeByScheduleKey,
+  getScheduleKey,
+} from "@/features/timetable/utils";
 
 interface TimeSlotPageProps {
   params: {
@@ -11,29 +13,30 @@ interface TimeSlotPageProps {
     term: string;
     dayTime: string;
   };
+
+  // TODO: タブを状態管理からクエリパラメータでの管理にする
   searchParams: {
     tab?: string;
   };
 }
 
 const TimeSlotPage = async ({ params }: TimeSlotPageProps) => {
-  const dayTime = parseInt(params.dayTime);
-  const year = parseInt(params.year);
-  const term = parseInt(params.term);
+  const dayTime = Number.parseInt(params.dayTime);
+  const year = Number.parseInt(params.year);
+  const term = Number.parseInt(params.term);
 
+  // TODO: タブを状態管理からクエリパラメータでの管理にする
   // const tab = searchParams.tab || "tasks";
 
-  // day/timeを逆算
-  const day = Math.floor(dayTime / 5) + 1;
-  const time = dayTime % 5;
+  const { day, time } = getDayTimeByScheduleKey(dayTime);
 
   const registration = await getRegistrationBySchedule(year, term, dayTime);
-  if (registration.length > 0) {
+  if (registration.length) {
     return <LectureDetail registration={registration[0]} />;
   }
 
   const lectures = await getLectures({
-    schedules: String((day - 1) * 5 + time),
+    schedules: String(getScheduleKey(day, time)),
     terms: term,
   });
 

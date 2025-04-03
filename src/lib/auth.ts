@@ -1,5 +1,4 @@
-/* eslint-disable */
-import { UserProfile } from "@/features/user/types";
+import type { UserProfile } from "@/features/user/types";
 import NextAuth from "next-auth";
 import "next-auth/jwt";
 
@@ -12,6 +11,7 @@ const getCurrentEpochTime = () => {
   return Math.floor(new Date().getTime() / 1000);
 };
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 let refreshPromise: Promise<any> | null = null;
 
 export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
@@ -48,7 +48,7 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
               headers: {
                 "Content-Type": "application/json",
               },
-            }
+            },
           );
 
           const data = await response.json();
@@ -82,6 +82,7 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
         token.profile = session.user.profile;
       }
 
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       if (getCurrentEpochTime() >= token.expire!) {
         try {
           if (refreshPromise === null) {
@@ -92,8 +93,8 @@ export const { handlers, auth, signIn, signOut, unstable_update } = NextAuth({
                 body: JSON.stringify({ refresh: token.refreshToken }),
                 headers: { "Content-Type": "application/json" },
                 cache: "no-store",
-              }
-            ).then((response) => {
+              },
+            ).then(response => {
               if (!response.ok) {
                 throw new Error(`Token refresh failed: ${response.status}`);
               }

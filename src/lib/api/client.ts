@@ -1,9 +1,10 @@
-/* eslint-disable */
-
 import { auth } from "@/lib/auth";
 
 export class ApiError extends Error {
-  constructor(public statusCode: number, message: string) {
+  constructor(
+    public statusCode: number,
+    message: string,
+  ) {
     super(message);
     this.name = "ApiError";
   }
@@ -15,7 +16,7 @@ export class ApiError extends Error {
 export async function fetchApi<T>(
   endpoint: string,
   options: RequestInit = {},
-  requireAuth = true
+  requireAuth = true,
 ): Promise<T> {
   const baseUrl = process.env.BACKEND_URL || "";
   const url = `${baseUrl}${endpoint}`;
@@ -30,7 +31,7 @@ export async function fetchApi<T>(
       if (!session?.user?.accessToken) {
         throw new ApiError(401, "認証が必要です。再度ログインしてください。");
       }
-      headers["Authorization"] = `Bearer ${session.user.accessToken}`;
+      headers.Authorization = `Bearer ${session.user.accessToken}`;
     }
 
     const response = await fetch(url, {
@@ -53,6 +54,7 @@ export async function fetchApi<T>(
 
     if (!response.ok) {
       const errorMessage =
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
         (data as any)?.error?.message ||
         response.statusText ||
         "リクエストに失敗しました";
@@ -66,7 +68,7 @@ export async function fetchApi<T>(
     }
     throw new ApiError(
       500,
-      error instanceof Error ? error.message : "不明なエラーが発生しました"
+      error instanceof Error ? error.message : "不明なエラーが発生しました",
     );
   }
 }

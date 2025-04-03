@@ -1,7 +1,7 @@
 import EditorBox from "@/features/editor/components/EditorBox";
-import { TableOfContents } from "@/lib/tiptap/extensions/TableOfContents";
-import { CustomBubbleMenu } from "@/lib/tiptap/menus";
-import { Editor, EditorContent } from "@tiptap/react";
+import { TableOfContents } from "@/features/editor/extensions/TableOfContents";
+import { CustomBubbleMenu } from "@/features/editor/menus";
+import { type Editor, EditorContent } from "@tiptap/react";
 import { Box, Stack } from "@yamada-ui/react";
 
 interface ArticleEditorContentProps {
@@ -28,11 +28,7 @@ const ArticleEditorContent = ({
       >
         <EditorWrapper w="full" minH="100vh" editor={editor}>
           <EditorContent editor={editor} />
-          {showBubbleMenu && (
-            <>
-              <CustomBubbleMenu editor={editor} />
-            </>
-          )}
+          {showBubbleMenu && <CustomBubbleMenu editor={editor} />}
         </EditorWrapper>
         {showTableOfContents && (
           <Box w="sm">

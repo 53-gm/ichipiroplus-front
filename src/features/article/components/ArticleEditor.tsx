@@ -1,4 +1,3 @@
-// src/app/[profile_id]/articles/[slug]/edit/ArticleEditor.tsx
 "use client";
 
 import { ApiError } from "@/lib/api/client";
@@ -11,18 +10,18 @@ import {
   AlertTitle,
   Button,
   FormControl,
-  Heading,
   HStack,
+  Heading,
   Input,
   Switch,
   Text,
-  useNotice,
   VStack,
+  useNotice,
 } from "@yamada-ui/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { updateArticle } from "../api";
-import { Article } from "../types";
+import type { Article } from "../types";
 import getArticleEditorConfig from "./ArticleEditorConfig";
 import ArticleEditorContent from "./ArticleEditorContent";
 
@@ -134,7 +133,7 @@ const ArticleEditor = ({ article }: ArticleEditorProps) => {
         <FormControl required label="タイトル">
           <Input
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={e => setTitle(e.target.value)}
             placeholder="タイトル"
             size="lg"
             fontSize="2xl"
