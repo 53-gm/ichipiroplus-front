@@ -2,6 +2,7 @@ import { getAllDepartments, getAllFaculties } from "@/features/user/api";
 import AccountSettings from "@/features/user/components/AccountSettings";
 import DisplaySettings from "@/features/user/components/DisplaySettings";
 import MyProfileEditForm from "@/features/user/components/MyProfileEditForm";
+import NotificationSettings from "@/features/webpush/components/NotificationSettings";
 import { getAuthUser } from "@/lib/auth-utils";
 
 interface SettingsPageProps {
@@ -28,6 +29,8 @@ const SettingsPage = async ({ searchParams }: SettingsPageProps) => {
       {tab === "account" && <AccountSettings />}
 
       {tab === "display" && <DisplaySettings />}
+
+      {tab === "notification" && <NotificationSettings />}
     </>
   );
 };

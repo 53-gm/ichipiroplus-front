@@ -66,7 +66,7 @@ export const getNavigationItems = (): NavMenuItem[] => {
         },
         {
           label: "通知設定",
-          href: "/settings?tab=notifications",
+          href: "/settings?tab=notification",
         },
       ],
     },
