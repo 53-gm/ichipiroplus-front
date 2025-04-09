@@ -14,6 +14,7 @@ import {
   useNotice,
 } from "@yamada-ui/react";
 import { useRouter } from "next/navigation";
+import AttendanceCounter from "./AttendanceCounter";
 import LectureSettingsTab from "./LectureSettingTab";
 
 interface LectureDetailTabsProps {
@@ -58,28 +59,38 @@ const LectureDetailTabs = ({ registration, tasks }: LectureDetailTabsProps) => {
   };
 
   return (
-    <Tabs w="full" variant="rounded" colorScheme="blue">
-      <TabList>
-        <Tab>タスク管理</Tab>
-        <Tab>設定</Tab>
-      </TabList>
+    <>
+      <Tabs w="full" variant="rounded" colorScheme="blue">
+        <TabList>
+          <Tab>出席</Tab>
+          <Tab>タスク管理</Tab>
+          <Tab>設定</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <AttendanceCounter
+              registrationId={registration.id}
+              initialCount={registration.attendance_count}
+              externalSystemUrl="https://ichipol.g.hiroshima-cu.ac.jp/uprx/MobileShibbolethAuthServlet"
+            />
+          </TabPanel>
 
-      <TabPanels>
-        <TabPanel>
-          <TasksDashboard
-            initialTasks={tasks}
-            registration_id={String(registration.id)}
-          />
-        </TabPanel>
+          <TabPanel>
+            <TasksDashboard
+              initialTasks={tasks}
+              registration_id={String(registration.id)}
+            />
+          </TabPanel>
 
-        <TabPanel>
-          <LectureSettingsTab
-            lecture={lecture}
-            onDeleteRegistration={handleDeleteRegistration}
-          />
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+          <TabPanel>
+            <LectureSettingsTab
+              lecture={lecture}
+              onDeleteRegistration={handleDeleteRegistration}
+            />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+    </>
   );
 };
 

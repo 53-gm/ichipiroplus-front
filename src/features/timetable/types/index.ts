@@ -68,6 +68,7 @@ export type LectureFormData = z.infer<typeof lectureFormSchema>;
 export interface Registration {
   id: string;
   lecture: Lecture;
+  attendance_count: number;
   year: number;
   registered_at: string;
 }

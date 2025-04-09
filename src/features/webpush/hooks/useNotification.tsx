@@ -137,10 +137,6 @@ export function useNotification() {
 
     try {
       if (!subscriptionState.isSubscribed) {
-        console.log("test");
-        // 通知を有効化
-
-        // 1. 許可をリクエスト
         const permissionResult = await requestNotificationPermission();
         setPermission(permissionResult);
 
@@ -148,20 +144,17 @@ export function useNotification() {
           return false;
         }
 
-        // 2. サブスクリプションを取得/作成
         const newSubscription = await getOrCreatePushSubscription();
         if (!newSubscription) {
           throw new Error("サブスクリプションの作成に失敗しました");
         }
 
-        // 3. サーバーに登録
         const subscriptionData = formatSubscriptionForApi(
           newSubscription,
           settings,
         );
         const response = await registerPushSubscription(subscriptionData);
 
-        // 4. 状態を更新
         setSubscription(newSubscription);
         setSubscriptionState({
           isSubscribed: true,
@@ -181,12 +174,10 @@ export function useNotification() {
         return true;
         // biome-ignore lint/style/noUselessElse: <explanation>
       } else {
-        // 通知を無効化
         if (!subscription) {
           return false;
         }
 
-        // 1. サーバーから登録解除
         const response = await unregisterPushSubscription(
           subscription.endpoint,
         );
@@ -195,10 +186,8 @@ export function useNotification() {
           throw new Error("サーバーからのサブスクリプション削除に失敗しました");
         }
 
-        // 2. ブラウザから登録解除
         await unsubscribeFromBrowser(subscription);
 
-        // 3. 状態を更新
         setSubscription(null);
         setSubscriptionState({
           isSubscribed: false,
@@ -247,7 +236,6 @@ export function useNotification() {
     setIsProcessing(true);
 
     try {
-      // 1. サーバーに設定を更新
       const response = await updateNotificationSettings({
         endpoint: subscription.endpoint,
         task_reminders: newSettings.taskReminders,
@@ -255,7 +243,6 @@ export function useNotification() {
         system_notices: newSettings.systemNotices,
       });
 
-      // 2. 状態を更新
       if (response.success) {
         setSubscriptionState({
           isSubscribed: true,
@@ -383,9 +370,7 @@ export function useNotification() {
     }
   };
 
-  // フックの返り値
   return {
-    // 状態
     isSupported,
     isLoading,
     isProcessing,
@@ -393,7 +378,6 @@ export function useNotification() {
     isSubscribed: subscriptionState.isSubscribed,
     settings: subscriptionState.settings,
 
-    // アクション
     toggleNotifications,
     updateSettings,
     sendTestNotifications,

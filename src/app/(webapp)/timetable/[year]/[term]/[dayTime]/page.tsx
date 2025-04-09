@@ -20,7 +20,7 @@ interface TimeSlotPageProps {
   };
 }
 
-const TimeSlotPage = async ({ params }: TimeSlotPageProps) => {
+const TimeSlotPage = async ({ params, searchParams }: TimeSlotPageProps) => {
   const dayTime = Number.parseInt(params.dayTime);
   const year = Number.parseInt(params.year);
   const term = Number.parseInt(params.term);
@@ -32,7 +32,11 @@ const TimeSlotPage = async ({ params }: TimeSlotPageProps) => {
 
   const registration = await getRegistrationBySchedule(year, term, dayTime);
   if (registration.length) {
-    return <LectureDetail registration={registration[0]} />;
+    return (
+      <>
+        <LectureDetail registration={registration[0]} />
+      </>
+    );
   }
 
   const lectures = await getLectures({
