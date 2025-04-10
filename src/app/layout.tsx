@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import "@/features/editor/styles/tiptap.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Center, VStack } from "@yamada-ui/react";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Zen_Kaku_Gothic_New } from "next/font/google";
 import type { ReactNode } from "react";
 import Footer from "../components/Footer";
@@ -15,6 +15,12 @@ const ZenKakuGothicNewFont = Zen_Kaku_Gothic_New({
   display: "swap",
   preload: false,
 });
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  width: "device-width",
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "いちぴろぷらす",
@@ -30,11 +36,6 @@ export const metadata: Metadata = {
   },
   other: {
     "mobile-web-app-capable": "yes",
-  },
-  viewport: {
-    initialScale: 1,
-    viewportFit: "cover",
-    width: "device-width",
   },
 };
 
