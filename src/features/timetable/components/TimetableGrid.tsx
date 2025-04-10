@@ -29,12 +29,13 @@ const TimeTableGrid = ({
     <Grid
       templateColumns={{
         base: "repeat(5, 3fr) 1fr",
-        md: "repeat(5, 3fr)",
+        md: "repeat(5, 1fr)",
       }}
-      templateRows={{ base: "1fr repeat(5, 2fr)" }}
+      templateRows={{ base: "1fr repeat(5, 3fr)" }}
       gap="xs"
       w="full"
-      minH="75vh"
+      h="75vh"
+      overflow="hidden"
     >
       {/* 曜日ヘッダー */}
       {DAYS.map(day => (
@@ -59,7 +60,7 @@ const TimeTableGrid = ({
                 <GridItem
                   key={key}
                   bg={["white", "black"]}
-                  p={{ base: "md", md: "sm" }}
+                  p={{ base: "md", md: "xs" }}
                   border="1px solid"
                   borderColor="gray.500"
                   borderRadius="md"
@@ -76,9 +77,22 @@ const TimeTableGrid = ({
                   >
                     {lecture ? (
                       <>
-                        <Text>{lecture.name}</Text>
+                        <Text
+                          fontSize={{ base: "md", md: "sm" }}
+                          fontWeight="medium"
+                          lineClamp={2}
+                          lineBreak={"anywhere"}
+                        >
+                          {lecture.name}
+                        </Text>
 
-                        <Text>{lecture.room || "教室未設定"}</Text>
+                        <Text
+                          fontSize={{ base: "sm", md: "xs" }}
+                          lineBreak={"anywhere"}
+                          lineClamp={1}
+                        >
+                          {lecture.room || "未登録"}
+                        </Text>
                       </>
                     ) : (
                       <Text color="gray.500">クリックして追加</Text>
