@@ -70,7 +70,7 @@ const MobileNav = () => {
       zIndex={100}
       display={{ base: "none", md: "block" }}
     >
-      <HStack justify="space-around" px="sm" className="pb-safe">
+      <HStack justify="space-around" px="sm" className="pb-safe pb-1">
         {navItems.map(item => {
           const isActive =
             pathname === item.href || pathname.startsWith(`${item.href}/`);
